@@ -4,7 +4,10 @@ import { getAllProjects, getProjectBySlug } from "@/lib/projects"
 import { DocumentFooter } from "@/components/document-footer"
 import { buildInfo } from "@/lib/build-info"
 import { TechnicalFigureLightbox } from "@/components/technical-figure-lightbox"
+import { FigureLinkHandler } from "@/components/figure-link-handler"
 import { ProjectHeroImage } from "@/components/project-hero-image"
+
+import { ProjectFigure } from "@/lib/projects"
 
 export function generateStaticParams() {
   const projects = getAllProjects()
@@ -56,7 +59,7 @@ function parseLocalDate(dateString: string): Date {
   return new Date(year, month - 1, day)
 }
 
-function parseInlineMarkdown(text: string): string {
+function parseInlineMarkdown(text: string, figures?: ProjectFigure[]): string {
   // Store links temporarily to protect them from other parsing
   const links: string[] = []
   text = text.replaceAll(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, linkText, url) => {
@@ -64,6 +67,19 @@ function parseInlineMarkdown(text: string): string {
     links.push(`<a href="${url}" class="text-primary hover:underline font-medium" target="_blank" rel="noopener noreferrer">${linkText}</a>`)
     return placeholder
   })
+
+  // Parse figure references (FIG-XXX) and link to the figure
+  if (figures && figures.length > 0) {
+    text = text.replaceAll(/\b(FIG-\d{3})\b/g, (_match, figId) => {
+      const figure = figures.find(f => f.id === figId)
+      if (figure) {
+        const placeholder = `§§§LINK${links.length}§§§`
+        links.push(`<a href="#${figId}" class="font-mono text-sm text-primary hover:underline">${figId}</a>`)
+        return placeholder
+      }
+      return figId
+    })
+  }
   
   // Parse bold **text** (but not if it's part of a link placeholder)
   text = text.replaceAll(/\*\*([^*]+)\*\*/g, '<strong class="font-sans font-bold">$1</strong>')
@@ -83,17 +99,17 @@ function parseInlineMarkdown(text: string): string {
   return text
 }
 
-function parseBulletLine(line: string): string | null {
+function parseBulletLine(line: string, figures?: ProjectFigure[]): string | null {
   const bulletRegex = /- \*\*(.+?)\*\*:?\s*(.*)/
   const match = bulletRegex.exec(line)
   if (match) {
-    const rest = match[2] ? `: <span class="font-serif text-lg">${parseInlineMarkdown(match[2])}</span>` : ""
-    return `<div class="flex gap-2 mb-2"><span class="font-sans font-bold text-primary">▸</span><span><strong class="font-sans text-lg">${parseInlineMarkdown(match[1])}</strong>${rest}</span></div>`
+    const rest = match[2] ? `: <span class="font-serif text-lg">${parseInlineMarkdown(match[2], figures)}</span>` : ""
+    return `<div class="flex gap-2 mb-2"><span class="font-sans font-bold text-primary">▸</span><span><strong class="font-sans text-lg">${parseInlineMarkdown(match[1], figures)}</strong>${rest}</span></div>`
   }
   return null
 }
 
-function parseNumberedLine(line: string): string | null {
+function parseNumberedLine(line: string, figures?: ProjectFigure[]): string | null {
   const numberCheckRegex = /^\d+\.\s+\*\*/
   if (!numberCheckRegex.exec(line)) return null
   
@@ -101,39 +117,40 @@ function parseNumberedLine(line: string): string | null {
   const match = numberedRegex.exec(line)
   if (match) {
     const numMatch = /^\d+/.exec(line)
-    const rest = match[2] ? ` — <span class="font-serif text-muted-foreground text-lg">${parseInlineMarkdown(match[2])}</span>` : ""
-    return `<div class="flex gap-3 mb-3 pl-4 border-l-2 border-muted"><span class="font-mono text-primary text-sm font-bold">${numMatch?.[0]}.</span><span><strong class="font-sans text-lg">${parseInlineMarkdown(match[1])}</strong>${rest}</span></div>`
+    const rest = match[2] ? ` — <span class="font-serif text-muted-foreground text-lg">${parseInlineMarkdown(match[2], figures)}</span>` : ""
+    return `<div class="flex gap-3 mb-3 pl-4 border-l-2 border-muted"><span class="font-mono text-primary text-sm font-bold">${numMatch?.[0]}.</span><span><strong class="font-sans text-lg">${parseInlineMarkdown(match[1], figures)}</strong>${rest}</span></div>`
   }
   return null
 }
 
-function parseMarkdownContent(content: string): string {
-  if (parseCache.has(content)) {
-    return parseCache.get(content)!
+function parseMarkdownContent(content: string, figures?: ProjectFigure[]): string {
+  const cacheKey = `${content}_${figures?.map(f => f.id).join(',') || ''}`
+  if (parseCache.has(cacheKey)) {
+    return parseCache.get(cacheKey)!
   }
 
   const result = content
     .split("\n")
     .map((line) => {
       if (line.startsWith("## ")) {
-        const headerText = parseInlineMarkdown(line.slice(3))
+        const headerText = parseInlineMarkdown(line.slice(3), figures)
         return `<h2 class="text-xl font-sans font-bold uppercase tracking-[0.05em] mt-10 mb-4 flex items-center gap-3"><span class="w-8 h-[2px] bg-primary"></span>${headerText}</h2>`
       }
       if (line.startsWith("- **")) {
-        const parsed = parseBulletLine(line)
+        const parsed = parseBulletLine(line, figures)
         if (parsed) return parsed
       }
-      const numberedResult = parseNumberedLine(line)
+      const numberedResult = parseNumberedLine(line, figures)
       if (numberedResult) return numberedResult
       if (line.trim() === "") return "<div class='h-4'></div>"
       if (line.startsWith("**") && line.endsWith("**")) {
-        return `<p class="font-sans font-bold text-primary mb-4 text-lg">${parseInlineMarkdown(line.slice(2, -2))}</p>`
+        return `<p class="font-sans font-bold text-primary mb-4 text-lg">${parseInlineMarkdown(line.slice(2, -2), figures)}</p>`
       }
-      return `<p class="font-serif leading-relaxed mb-4 text-foreground/90 text-lg">${parseInlineMarkdown(line)}</p>`
+      return `<p class="font-serif leading-relaxed mb-4 text-foreground/90 text-lg">${parseInlineMarkdown(line, figures)}</p>`
     })
     .join("")
 
-  parseCache.set(content, result)
+  parseCache.set(cacheKey, result)
   return result
 }
 
@@ -150,7 +167,7 @@ export default async function ProjectPage({ params }: Readonly<{ params: Promise
   const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null
 
-  const contentHtml = parseMarkdownContent(project.content)
+  const contentHtml = parseMarkdownContent(project.content, project.images?.figures)
   
   const publishedDate = parseLocalDate(project.publishedAt)
   const pubYear = publishedDate.getFullYear()
@@ -218,7 +235,9 @@ export default async function ProjectPage({ params }: Readonly<{ params: Promise
       )}
 
       {/* Content */}
-      <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <FigureLinkHandler figures={project.images?.figures || []}>
+        <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      </FigureLinkHandler>
 
       {project.images?.figures && project.images.figures.length > 0 && (
         <div className="mt-12 pt-8 border-t-2 border-foreground">

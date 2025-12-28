@@ -18,9 +18,9 @@ export function TechnicalFigureLightbox({ figure }: Readonly<TechnicalFigureLigh
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <>
+    <div id={figure.id} className="scroll-mt-24">
       <TechnicalFigureThumbnail figure={figure} onClick={() => setIsOpen(true)} />
       <TechnicalFigureModal figure={figure} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </>
+    </div>
   )
 }
