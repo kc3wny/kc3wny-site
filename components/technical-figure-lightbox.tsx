@@ -3,15 +3,10 @@
 import { useState } from "react"
 import { TechnicalFigureThumbnail } from "./technical-figure-thumbnail"
 import { TechnicalFigureModal } from "./technical-figure-modal"
-
-type TechnicalFigure = {
-  id: string
-  src: string
-  caption: string
-}
+import type { ProjectFigure } from "@/lib/projects"
 
 type TechnicalFigureLightboxProps = {
-  figure: TechnicalFigure
+  figure: ProjectFigure
 }
 
 export function TechnicalFigureLightbox({ figure }: Readonly<TechnicalFigureLightboxProps>) {

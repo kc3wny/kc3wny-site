@@ -1,17 +1,29 @@
 import { notFound } from "next/navigation"
+import DOMPurify from "isomorphic-dompurify"
+import parse from "html-react-parser"
 import { DocumentWrapper } from "@/components/document-wrapper"
-import { getAllProjects, getProjectBySlug } from "@/lib/projects"
+import { getAllProjects, getProjectBySlug, type ProjectFigure } from "@/lib/projects"
 import { DocumentFooter } from "@/components/document-footer"
 import { buildInfo } from "@/lib/build-info"
 import { TechnicalFigureLightbox } from "@/components/technical-figure-lightbox"
 import { FigureLinkHandler } from "@/components/figure-link-handler"
 import { ProjectHeroImage } from "@/components/project-hero-image"
-
-import { ProjectFigure } from "@/lib/projects"
+import { parseLocalDate } from "@/lib/utils"
 
 export function generateStaticParams() {
   const projects = getAllProjects()
   return projects.map((project) => ({ slug: project.slug }))
+}
+
+/**
+ * Component for rendering sanitized HTML content as React elements.
+ * Uses DOMPurify to sanitize and html-react-parser to convert to React elements.
+ */
+function SanitizedHtmlContent({ html, className }: { html: string; className?: string }) {
+  const sanitizedHtml = DOMPurify.sanitize(html, {
+    ADD_ATTR: ["class", "target", "rel"],
+  })
+  return <div className={className}>{parse(sanitizedHtml)}</div>
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -53,11 +65,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const parseCache = new Map<string, string>()
-
-function parseLocalDate(dateString: string): Date {
-  const [year, month, day] = dateString.split('-').map(Number)
-  return new Date(year, month - 1, day)
-}
 
 function parseInlineMarkdown(text: string, figures?: ProjectFigure[]): string {
   // Store links temporarily to protect them from other parsing
@@ -125,8 +132,9 @@ function parseNumberedLine(line: string, figures?: ProjectFigure[]): string | nu
 
 function parseMarkdownContent(content: string, figures?: ProjectFigure[]): string {
   const cacheKey = `${content}_${figures?.map(f => f.id).join(',') || ''}`
-  if (parseCache.has(cacheKey)) {
-    return parseCache.get(cacheKey)!
+  const cached = parseCache.get(cacheKey)
+  if (cached) {
+    return cached
   }
 
   const result = content
@@ -236,7 +244,7 @@ export default async function ProjectPage({ params }: Readonly<{ params: Promise
 
       {/* Content */}
       <FigureLinkHandler figures={project.images?.figures || []}>
-        <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        <SanitizedHtmlContent html={contentHtml} className="prose prose-sm max-w-none" />
       </FigureLinkHandler>
 
       {project.images?.figures && project.images.figures.length > 0 && (

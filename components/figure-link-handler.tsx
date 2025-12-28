@@ -2,20 +2,15 @@
 
 import { useState, useEffect, useRef, type ReactNode } from "react"
 import { TechnicalFigureModal } from "./technical-figure-modal"
-
-type TechnicalFigure = {
-  id: string
-  src: string
-  caption: string
-}
+import type { ProjectFigure } from "@/lib/projects"
 
 type FigureLinkHandlerProps = {
-  figures: TechnicalFigure[]
+  figures: ProjectFigure[]
   children: ReactNode
 }
 
 export function FigureLinkHandler({ figures, children }: Readonly<FigureLinkHandlerProps>) {
-  const [openFigure, setOpenFigure] = useState<TechnicalFigure | null>(null)
+  const [openFigure, setOpenFigure] = useState<ProjectFigure | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
