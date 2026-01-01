@@ -23,9 +23,3 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the local version
-
-Run to generate image blurs:
-
-```bash
-pnpm generate:blur
-```

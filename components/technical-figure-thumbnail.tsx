@@ -2,36 +2,16 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-
-type TechnicalFigure = {
-  id: string
-  src: string
-  caption: string
-}
-
-type ImageMetadata = {
-  width: number
-  height: number
-  blurDataUrl: string
-}
+import type { ProjectFigure } from "@/lib/projects"
+import { getContentPathFromSrc, type ImageMetadata } from "@/lib/image-utils"
 
 type TechnicalFigureThumbnailProps = {
-  figure: TechnicalFigure
+  figure: ProjectFigure
   onClick: () => void
 }
 
-// Helper to convert image src to API path
-function getContentPath(src: string): string | null {
-  // Handle /api/content-image paths
-  if (src.startsWith('/api/content-image')) {
-    const url = new URL(src, 'http://localhost')
-    return url.searchParams.get('path')
-  }
-  return null
-}
-
 export function TechnicalFigureThumbnail({ figure, onClick }: Readonly<TechnicalFigureThumbnailProps>) {
-  const contentPath = getContentPath(figure.src)
+  const contentPath = getContentPathFromSrc(figure.src)
   const [metadata, setMetadata] = useState<ImageMetadata | null>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   // Initialize thumbnail source: use original for non-content images, null for content images (will load via API)

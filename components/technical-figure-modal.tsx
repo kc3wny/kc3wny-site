@@ -3,33 +3,13 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { X, Loader2 } from "lucide-react"
-
-type TechnicalFigure = {
-  id: string
-  src: string
-  caption: string
-}
-
-type ImageMetadata = {
-  width: number
-  height: number
-  blurDataUrl: string
-}
+import type { ProjectFigure } from "@/lib/projects"
+import { getContentPathFromSrc, type ImageMetadata } from "@/lib/image-utils"
 
 type TechnicalFigureModalProps = {
-  figure: TechnicalFigure
+  figure: ProjectFigure
   isOpen: boolean
   onClose: () => void
-}
-
-// Helper to convert image src to API path
-function getContentPath(src: string): string | null {
-  // Handle /api/content-image paths
-  if (src.startsWith('/api/content-image')) {
-    const url = new URL(src, 'http://localhost')
-    return url.searchParams.get('path')
-  }
-  return null
 }
 
 export function TechnicalFigureModal({ figure, isOpen, onClose }: Readonly<TechnicalFigureModalProps>) {
@@ -37,7 +17,7 @@ export function TechnicalFigureModal({ figure, isOpen, onClose }: Readonly<Techn
   const [isLoading, setIsLoading] = useState(true)
   
   // Compute fullResSrc based on figure.src
-  const contentPath = getContentPath(figure.src)
+  const contentPath = getContentPathFromSrc(figure.src)
   const initialFullResSrc = contentPath ? null : figure.src
   const [fullResSrc, setFullResSrc] = useState<string | null>(initialFullResSrc)
 

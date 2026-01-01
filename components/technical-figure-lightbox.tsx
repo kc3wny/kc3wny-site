@@ -3,24 +3,19 @@
 import { useState } from "react"
 import { TechnicalFigureThumbnail } from "./technical-figure-thumbnail"
 import { TechnicalFigureModal } from "./technical-figure-modal"
-
-type TechnicalFigure = {
-  id: string
-  src: string
-  caption: string
-}
+import type { ProjectFigure } from "@/lib/projects"
 
 type TechnicalFigureLightboxProps = {
-  figure: TechnicalFigure
+  figure: ProjectFigure
 }
 
 export function TechnicalFigureLightbox({ figure }: Readonly<TechnicalFigureLightboxProps>) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <>
+    <div id={figure.id} className="scroll-mt-24">
       <TechnicalFigureThumbnail figure={figure} onClick={() => setIsOpen(true)} />
       <TechnicalFigureModal figure={figure} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </>
+    </div>
   )
 }

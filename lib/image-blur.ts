@@ -1,11 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import type { ImageMetadata } from './image-utils'
 
-export type ImageMetadata = {
-  width: number
-  height: number
-  blurDataUrl: string
-}
+// Re-export client-safe utilities for backward compatibility
+export { getContentPathFromSrc, type ImageMetadata } from './image-utils'
 
 // In-memory cache for the current build
 const memoryCache = new Map<string, ImageMetadata>()
@@ -105,19 +103,4 @@ export async function getImageBlurData(imagePath: string): Promise<ImageMetadata
     console.error('Failed to generate blur data:', error)
     return null
   }
-}
-
-/**
- * Extract the content path from an API image URL
- */
-export function getContentPathFromSrc(src: string): string | null {
-  if (src.startsWith('/api/content-image')) {
-    try {
-      const url = new URL(src, 'http://localhost')
-      return url.searchParams.get('path')
-    } catch {
-      return null
-    }
-  }
-  return null
 }
