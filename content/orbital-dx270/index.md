@@ -112,7 +112,7 @@ figures:
     id: "FIG-035"
 ---
 ## Overview
-One of the many projects I've worked on as a member of the Stanford SSI Satellites team has been ensuring availability of our ground stations. Under our mission design for the 2U SAMWISE spacecraft, there are approximately three direct ground passes over the Stanford campus a day, lasting for about five minutes each. A nagging worry then has been poorly timed power, internet, or equipment failures could leave us unable to command the spacecraft, which was deemed an unacceptable mission risk.
+One of the many projects I've worked on as a member of the Stanford SSI Satellites team has been ensuring availability of our ground stations. Under our mission design for the 2U SAMWISE spacecraft, there are approximately three direct ground passes over the Stanford campus a day, lasting for about five minutes each. A nagging worry has been poorly timed power, internet, or equipment failures could leave us unable to command the spacecraft, which was deemed an unacceptable mission risk.
 This project aims to build a small, portable antenna designed to work across the 2m [VHF] and 70cm [UHF] bands and can be stowed in a Pelican case. This ensures we always have the ability to manually track and command our satellite in an emergency situation.
 ## Technical Specifications
 - **Frequency Bands**: 2m [UHF] & 70cm [VHF] [connected via duplexer]
