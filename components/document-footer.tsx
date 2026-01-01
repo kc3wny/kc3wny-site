@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { buildInfo } from "@/lib/build-info"
 
 type DocumentNavigation = {
   prev?: {
@@ -73,7 +74,7 @@ export function DocumentFooter({ documentControl, lastUpdated, navigation }: Doc
 
       {/* Bottom bar */}
       <div className="mt-6 pt-4 border-t border-muted flex flex-col md:flex-row justify-between items-center gap-2 text-[9px] tracking-[0.2em] text-muted-foreground uppercase">
-        <span>© 2025 M. Matich — All Rights Reserved</span>
+        <span>© {buildInfo.commitYear} M. Matich — All Rights Reserved</span>
         <span>Printed on glass terminal</span>
         <span>Page 1 of 1</span>
       </div>

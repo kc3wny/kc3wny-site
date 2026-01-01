@@ -45,10 +45,22 @@ function getDocumentNumber(prefix: string = "PF"): string {
   return `${prefix}-${year}-${commit}`
 }
 
+function getCommitYear(): string {
+  // Use Vercel's commit date if available
+  if (process.env.VERCEL_GIT_COMMIT_DATE) {
+    const date = new Date(process.env.VERCEL_GIT_COMMIT_DATE)
+    return date.getFullYear().toString()
+  }
+  
+  // Fallback to current year
+  return new Date().getFullYear().toString()
+}
+
 export const buildInfo = {
   commitHash: getCommitHash(),
   buildDate: getBuildDate(),
   revision: getRevision(),
+  commitYear: getCommitYear(),
   getDocumentNumber,
 }
 
