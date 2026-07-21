@@ -1,71 +1,67 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
+
+/**
+ * Web 1.0 masthead + pipe navigation bar. Logo left, station identity right,
+ * followed by the classic pipe-separated text nav. The current page is shown
+ * as an orange [ Label ] instead of a link.
+ */
+
+type NavItem = { readonly label: string; readonly href: string };
+
+const NAV_ITEMS: readonly NavItem[] = [
+	{ label: "Home", href: "/" },
+	{ label: "Projects", href: "/projects" },
+	{ label: "Site Map", href: "/sitemap" },
+	{ label: "Contact", href: "/#contact" },
+	{ label: "Résumé (PDF)", href: "/MMatich_Resume.pdf" },
+];
 
 type DocumentHeaderProps = {
-  readonly documentNo: string
-  readonly revision: string
-  readonly date: string
-  readonly sections: string
-  readonly classification?: string
-}
+	/** Nav label of the current page, e.g. "Projects" */
+	readonly current?: string;
+};
 
-export function DocumentHeader({
-  documentNo,
-  revision,
-  date,
-  sections,
-  classification = "Public",
-}: DocumentHeaderProps) {
-  return (
-    <header className="border-b-2 border-foreground pb-6 mb-8">
-      {/* Top classification bar */}
-      <div className="flex justify-between items-start mb-6">
-        <div className="text-[10px] tracking-[0.3em] text-muted-foreground font-sans uppercase">
-          Public Release
-        </div>
-        <div className="text-right">
-          <div className="text-[10px] tracking-[0.2em] text-muted-foreground font-sans">DOCUMENT NO.</div>
-          <div className="font-mono text-sm">{documentNo}</div>
-        </div>
-      </div>
+export function DocumentHeader({ current }: DocumentHeaderProps) {
+	return (
+		<>
+			<table className="masthead">
+				<tbody>
+					<tr>
+						<td className="mh-logo">
+							<Link href="/" aria-label="KC3WNY home">
+								<Image
+									src="/logo/v4_wide_text.svg"
+									alt="KC3WNY"
+									width={372}
+									height={70}
+									priority
+								/>
+							</Link>
+						</td>
+						<td className="mh-info">
+							<div className="mh-tag">Grid CM87 · Mason Matich</div>
+							<div className="mh-loc">Stanford, California · Ext. Class</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-      {/* Main title block */}
-      <div className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-4 md:gap-y-0 items-center md:items-end">
-        
-        {/* 1. Logo */}
-        <Link href="/" className="relative w-20 h-20 md:w-24 md:h-24 border-1 border-foreground flex items-center justify-center row-span-1 md:row-span-2 hover:bg-secondary/30 transition-colors cursor-pointer">
-          <Image
-            src="/logo/v4.svg"
-            alt="Logo"
-            fill
-            className="object-contain" 
-          />
-        </Link>
-
-        {/* 2. Main Title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold tracking-tight leading-[0.9] md:leading-none md:mb-2">
-          KC3WNY SYSTEMS
-        </h1>
-
-        {/* 3. Name & Profession */}
-        <div className="flex items-baseline gap-2 md:gap-4 col-span-2 md:col-span-1 md:col-start-2">
-          <span className="text-xl md:text-3xl font-serif italic text-primary">
-            Mason Matich
-          </span>
-          <span className="text-[10px] md:text-xs tracking-[0.2em] text-muted-foreground font-sans uppercase">
-            Mechanical Engineer
-          </span>
-        </div>
-
-      </div>
-
-      {/* Revision info */}
-      <div className="mt-6 pt-4 border-t border-muted flex flex-wrap gap-x-8 gap-y-2 text-[10px] tracking-[0.15em] text-muted-foreground font-sans uppercase">
-        <span>Revision: {revision}</span>
-        <span>Effective Date: {date}</span>
-        <span>Classification: {classification}</span>
-        <span>Sections: {sections}</span>
-      </div>
-    </header>
-  )
+			<nav className="navbar">
+				{NAV_ITEMS.map((item, i) => {
+					const isCurrent = current === item.label;
+					return (
+						<span key={item.href}>
+							{i > 0 && <span className="sep">|</span>}
+							{isCurrent ? (
+								<span className="here">[ {item.label} ]</span>
+							) : (
+								<Link href={item.href}>{item.label}</Link>
+							)}
+						</span>
+					);
+				})}
+			</nav>
+		</>
+	);
 }

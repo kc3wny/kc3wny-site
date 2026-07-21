@@ -3,6 +3,7 @@ title: "SSI Satellites SAMWISE"
 type: "Project"
 description: "A student-built 2U technology demonstrator launching Transporter 18!"
 publishedAt: "2026-03-20"
+new: true
 heroImage: "/api/content-image?path=samwise/samwise_render.png"
 figures:
   - src: "/api/content-image?path=samwise/GroundOps Room.jpg"
@@ -14,7 +15,7 @@ figures:
   - src: "/api/content-image?path=samwise/LNA replacement2.jpg"
     caption: "LNA replacement in-progress"
     id: "FIG-003"
-  - src: "/api/content-image?path=samwise/Ground Operations Architecture.png"
+  - src: "/api/content-image?path=samwise/Ground Operations Architecture.jpg"
     caption: "Ground operations architecture"
     id: "FIG-004"
   - src: "/api/content-image?path=samwise/Laser cut.jpg"
