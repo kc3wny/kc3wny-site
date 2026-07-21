@@ -257,11 +257,7 @@ export default async function ProjectPage({
 	);
 
 	return (
-		<DocumentWrapper current="Projects">
-			<p className="small">
-				<a href="/projects">Projects</a> &raquo; <b>{project.title}</b>
-			</p>
-
+		<DocumentWrapper>
 			<hr />
 
 			<h1 className="mh-call" style={{ fontSize: "34px", margin: "6px 0 2px" }}>

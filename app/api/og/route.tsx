@@ -1,13 +1,33 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "fs/promises";
-import { join } from "path";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import sharp from "sharp";
+
+// Satori (next/og's layout engine) can't reliably rasterize the logo's SVG
+// directly — it needs numeric width/height for <img> and errors on complex
+// vector paths. Pre-rasterize to PNG with sharp instead.
+async function getLogoPng(): Promise<{
+	dataUrl: string;
+	width: number;
+	height: number;
+}> {
+	const logoPath = join(process.cwd(), "public", "logo", "v4_text.svg");
+	const svgBuffer = await readFile(logoPath);
+	const pngBuffer = await sharp(svgBuffer)
+		.resize({ width: 600 })
+		.png()
+		.toBuffer();
+	const { width, height } = await sharp(pngBuffer).metadata();
+
+	return {
+		dataUrl: `data:image/png;base64,${pngBuffer.toString("base64")}`,
+		width: width ?? 600,
+		height: height ?? 295,
+	};
+}
 
 export async function GET() {
-	const logoPath = join(process.cwd(), "public", "logo", "v4_text.svg");
-	const logoSvg = await readFile(logoPath, "utf-8");
-
-	const svgBuffer = Buffer.from(logoSvg);
-	const base64Svg = svgBuffer.toString("base64");
+	const logo = await getLogoPng();
 
 	return new ImageResponse(
 		<div
@@ -22,10 +42,10 @@ export async function GET() {
 		>
 			{/* eslint-disable-next-line @next/next/no-img-element */}
 			<img
-				src={`data:image/svg+xml;base64,${base64Svg}`}
+				src={logo.dataUrl}
 				alt="Logo"
-				width="600"
-				height="295"
+				width={logo.width}
+				height={logo.height}
 				style={{ objectFit: "contain" }}
 			/>
 		</div>,

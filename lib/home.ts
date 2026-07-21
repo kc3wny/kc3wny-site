@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { getFileUpdatedAt } from "@/lib/git";
 
 export interface QuickFact {
 	label: string;
@@ -55,6 +56,8 @@ export interface HomeContent {
 	projectExperience: ProjectExperience[];
 	memberships: Membership[];
 	contact: ContactChannel[];
+	/** ISO timestamp of the last git commit that touched content/home.md (falls back to filesystem mtime). */
+	updatedAt: string;
 }
 
 const homeContentPath = path.join(process.cwd(), "content", "home.md");
@@ -71,5 +74,6 @@ export function getHomeContent(): HomeContent {
 		projectExperience: data.projectExperience,
 		memberships: data.memberships,
 		contact: data.contact,
+		updatedAt: getFileUpdatedAt(homeContentPath),
 	};
 }

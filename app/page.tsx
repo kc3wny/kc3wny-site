@@ -6,11 +6,16 @@ import { ExperienceSection } from "@/components/experience-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ProfessionalMembershipsSection } from "@/components/professional-memberships-section";
 import { ContactSection } from "@/components/contact-section";
-import { buildInfo } from "@/lib/build-info";
 import { getHomeContent } from "@/lib/home";
+import { incrementVisitorCount } from "@/lib/visitor-count";
 
-export default function Home() {
+// The visitor counter increments on every request, so this page can't be
+// statically prerendered — it needs to run server-side on each visit.
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
 	const content = getHomeContent();
+	const visitorCount = await incrementVisitorCount();
 	const {
 		biography,
 		skills,
@@ -18,7 +23,9 @@ export default function Home() {
 		projectExperience,
 		memberships,
 		contact,
+		updatedAt,
 	} = content;
+	const updatedDate = new Date(updatedAt);
 
 	return (
 		<DocumentWrapper current="Home">
@@ -26,9 +33,17 @@ export default function Home() {
 
 			{/* Status line — last updated + hit counter */}
 			<div className="statusline">
-				<span>Last updated: {buildInfo.buildDate}</span>
+				<span>
+					Last updated:{" "}
+					{updatedDate.toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "short",
+						day: "numeric",
+					})}
+				</span>
 				<span className="counter">
-					You are visitor no. <span className="odo">0042571</span>
+					You are visitor no.{" "}
+					<span className="odo">{String(visitorCount).padStart(7, "0")}</span>
 				</span>
 			</div>
 

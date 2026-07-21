@@ -5,11 +5,11 @@ import { DocumentFooter } from "@/components/document-footer";
 import { parseLocalDate } from "@/lib/utils";
 
 export const metadata = {
-	title: "PROJECT INDEX // M. Matich",
-	description: "Project index and catalog",
+	title: "projects @kc3wny.com",
+	description: "a chronological list of projects",
 	openGraph: {
-		title: "PROJECT INDEX // M. Matich",
-		description: "Project index and catalog",
+		title: "projects @kc3wny.com",
+		description: "a chronological list of projects",
 		type: "website",
 		url: "https://kc3wny.com/projects",
 		images: [

@@ -2,15 +2,15 @@ import Link from "next/link";
 import { DocumentWrapper } from "@/components/document-wrapper";
 import { getAllProjects } from "@/lib/projects";
 import { DocumentFooter } from "@/components/document-footer";
-import { buildInfo } from "@/lib/build-info";
+import { getHomeContent } from "@/lib/home";
 import { parseLocalDate } from "@/lib/utils";
 
 export const metadata = {
-	title: "SITEMAP // M. Matich",
-	description: "Site navigation and document index",
+	title: "sitemap @kc3wny.com",
+	description: "sitemap of all pages",
 	openGraph: {
-		title: "SITEMAP // M. Matich",
-		description: "Site navigation and document index",
+		title: "sitemap @kc3wny.com",
+		description: "sitemap of all pages",
 		type: "website",
 		url: "https://kc3wny.com/sitemap",
 		images: [
@@ -35,8 +35,22 @@ export const metadata = {
 	},
 };
 
+function formatDate(iso: string): string {
+	return new Date(iso).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
+}
+
 export default function SitemapPage() {
 	const projects = getAllProjects();
+	const home = getHomeContent();
+	// Most recently touched project file, so the "updated" note on the index reflects real edits.
+	const projectsUpdatedAt = projects.reduce(
+		(latest, p) => (p.updatedAt > latest ? p.updatedAt : latest),
+		projects[0]?.updatedAt ?? home.updatedAt,
+	);
 
 	return (
 		<DocumentWrapper current="Site Map">
@@ -45,16 +59,16 @@ export default function SitemapPage() {
 			<h1 className="mh-call" style={{ fontSize: "30px", margin: "6px 0 2px" }}>
 				Site Map
 			</h1>
-			<p className="byline">
-				Every page on kc3wny.com. If you get lost, start here.
-			</p>
+			<p className="byline">Every page on kc3wny.com</p>
 
 			<hr />
 
 			<ul className="tree">
 				<li>
 					<Link href="/">Home</Link>{" "}
-					<span className="note">&mdash; updated {buildInfo.buildDate}</span>
+					<span className="note">
+						&mdash; updated {formatDate(home.updatedAt)}
+					</span>
 					<ul>
 						<li>
 							<Link href="/#bio">Biography</Link>
@@ -76,7 +90,7 @@ export default function SitemapPage() {
 				<li>
 					<Link href="/projects">Project Index</Link>{" "}
 					<span className="note">
-						&mdash; /projects &middot; updated {buildInfo.buildDate}
+						&mdash; updated {formatDate(projectsUpdatedAt)}
 					</span>
 					<ul>
 						{projects.map((p) => (
@@ -93,6 +107,9 @@ export default function SitemapPage() {
 							</li>
 						))}
 					</ul>
+				</li>
+				<li>
+					<Link href="/webring">WebRing</Link>
 				</li>
 				<li>
 					External Links
@@ -123,14 +140,6 @@ export default function SitemapPage() {
 					</ul>
 				</li>
 			</ul>
-
-			<hr className="thin" />
-
-			<p className="small">
-				This site is <b>static HTML</b> &mdash; no database, no build step, no
-				JavaScript required. View source and poke around; that&rsquo;s what the
-				web is for.
-			</p>
 
 			<DocumentFooter />
 		</DocumentWrapper>

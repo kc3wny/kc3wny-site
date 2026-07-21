@@ -553,11 +553,24 @@
 	.retro-desktop .mh-call {
 		font-size: 30px;
 	}
+	/* Stack the logo and station info instead of squeezing them into a table
+	   row — at narrow widths the info cell had almost no space left and
+	   wrapped one word per line. */
+	.retro-desktop .masthead,
+	.retro-desktop .masthead tbody,
+	.retro-desktop .masthead tr,
 	.retro-desktop .masthead td {
-		padding: 4px 2px;
+		display: block;
+		width: auto;
+	}
+	.retro-desktop .masthead td {
+		padding: 2px 0;
 	}
 	.retro-desktop .mh-logo {
-		padding-right: 10px;
+		padding-right: 0;
+	}
+	.retro-desktop .mh-info {
+		text-align: left;
 	}
 	.retro-desktop .mh-logo img {
 		height: 48px;

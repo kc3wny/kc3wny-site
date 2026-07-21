@@ -1,7 +1,7 @@
-import { execFileSync } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import matter from "gray-matter";
+import { getFileUpdatedAt } from "@/lib/git";
 
 export interface ProjectFigure {
 	src: string;
@@ -41,31 +41,6 @@ const projectsDirectory = path.join(process.cwd(), "content");
 function deriveCode(slug: string): string {
 	const cleaned = slug.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
 	return cleaned.slice(0, 5) || "PROJ";
-}
-
-/**
- * Last-modified timestamp for a project's markdown file, sourced from git
- * history so it updates automatically whenever the file is edited — no
- * manual frontmatter to maintain. Falls back to the filesystem mtime if git
- * is unavailable or the file has no history yet (e.g. a shallow clone).
- */
-function getFileUpdatedAt(filePath: string): string {
-	try {
-		const output = execFileSync(
-			"git",
-			["log", "-1", "--format=%cI", "--", filePath],
-			{
-				cwd: process.cwd(),
-				stdio: ["ignore", "pipe", "ignore"],
-			},
-		)
-			.toString()
-			.trim();
-		if (output) return output;
-	} catch {
-		// git unavailable — fall through to filesystem mtime
-	}
-	return fs.statSync(filePath).mtime.toISOString();
 }
 
 /**

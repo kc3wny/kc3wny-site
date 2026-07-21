@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { buildInfo } from "@/lib/build-info";
+import { WEBRING_NEXT, WEBRING_PREV } from "@/lib/webring";
+import { WebringRandomLink } from "@/components/webring-random-link";
 
 type NavLink = { readonly href: string; readonly title: string };
 
@@ -15,12 +17,11 @@ type DocumentFooterProps = {
 
 const BADGES = [
 	{ cls: "b-amber", a: "KC3WNY", b: "Amateur Radio", mono: true },
-	{ cls: "b-grey", a: "Best Viewed", b: "at 800×600" },
-	{ cls: "b-dark", a: "Made With", b: "a Text Editor" },
-	{ cls: "b-blue", a: "HTML", b: "Hand-Coded", big: true },
-	{ cls: "b-green", a: "Powered By", b: "GNU/Linux" },
-	{ cls: "b-red", a: "Lynx", b: "Friendly" },
-	{ cls: "b-grey", a: "Y2K", b: "Compliant" },
+	{ cls: "b-grey", a: "Powered By", b: "White Monster" },
+	{ cls: "b-dark", a: "SAMWISE My", b: "Beloved" },
+	{ cls: "b-blue", a: "I Use", b: "Arch BTW", big: true },
+	{ cls: "b-green", a: "Funny", b: "Comment" },
+	{ cls: "b-red", a: "TrackPoint", b: "Superiority" },
 ] as const;
 
 /**
@@ -57,12 +58,24 @@ export function DocumentFooter({
 			<div className="foot">
 				{webring && (
 					<div className="webring">
-						<b>« Ham Radio WebRing »</b>
+						<b>« WebRing »</b>
 						<br />
-						<Link href="#">[ &lt; Prev ]</Link> &nbsp;{" "}
-						<Link href="#">[ Random ]</Link> &nbsp;{" "}
-						<Link href="#">[ List ]</Link> &nbsp;{" "}
-						<Link href="#">[ Next &gt; ]</Link>
+						<a
+							href={WEBRING_PREV.url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							[ &lt; Prev ]
+						</a>{" "}
+						&nbsp; <WebringRandomLink /> &nbsp;{" "}
+						<Link href="/webring">[ List ]</Link> &nbsp;{" "}
+						<a
+							href={WEBRING_NEXT.url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							[ Next &gt; ]
+						</a>
 					</div>
 				)}
 				<div className="badges">
@@ -78,8 +91,8 @@ export function DocumentFooter({
 					))}
 				</div>
 				<div className="legal">
-					Copyright © 1998–{buildInfo.commitYear} Mason Matich (KC3WNY). All
-					rights reserved. &nbsp;·&nbsp; 73 de KC3WNY
+					Copyright © 2005–{buildInfo.commitYear} Mason Matich. All rights
+					reserved. &nbsp;·&nbsp; 73 KC3WNY
 				</div>
 			</div>
 		</>

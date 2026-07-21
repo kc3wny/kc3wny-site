@@ -13,11 +13,11 @@ const garamond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-	title: "KC3WNY SYSTEMS // M. MATICH",
-	description: "Personal website of Mason Matich",
+	title: "home @kc3wny.com",
+	description: "personal website of Mason Matich",
 	openGraph: {
-		title: "KC3WNY SYSTEMS // M. MATICH",
-		description: "Personal website of Mason Matich",
+		title: "home @kc3wny.com",
+		description: "personal website of Mason Matich",
 		type: "website",
 		url: "https://kc3wny.com",
 		images: [
