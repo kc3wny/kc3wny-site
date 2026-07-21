@@ -39,6 +39,7 @@ figures:
 ---
 ## Overview
 In times of disaster, the capacity of rigid networks like cell service and internet dramatically decreases at the same time demand increases as people try to get information and contact loved ones. This can lead to crippled telecom services which can significantly impact first responders in disaster struck areas, especially in dense urban environments where traditional radios don't work well.
+
 Meshworks addresses this problem by creating a resilient, self-healing mesh network using LoRa radio technology. Device nodes in the field network to each other and to the command node through LoRa to send messages, which increases range and resiliency as more device nodes join. The command & control center receives summarized reports from the field, visualized on an interactive map.
 ## Technical Specifications
 - **Frequency**: 915 MHz (ISM)
@@ -53,7 +54,9 @@ Meshworks addresses this problem by creating a resilient, self-healing mesh netw
 - **Direction Sensing**: Integrated magnetometer to demo telemetry as a stand in for GNSS
 ## Architectural Overview
 The system consists of two main components: distributed device nodes and a central command node/server.
+
 **Device Nodes**: Built using Wio Terminals with LoRa modules and magnetometers. I architected the mesh network system and wrote the node firmware in CircuitPython, including custom magnetometer and LoRa modem drivers, the packet routing and priority protocol, and the protocol to interface with the Command node. I also soldered the modules together and designed the enclosure in Fusion360.
+
 **Command Node**: A Flask-based web dashboard running on Ubuntu Server that receives, processes, and visualizes field reports. Uses Intel-optimized AI models for efficient speech-to-text processing and natural language understanding.
 ## Challenges
 The limited RAM and storage of microcontrollers made it more difficult to record audio and run TinyML as we intended. Many modules, especially the LoRa and magnetometer, did not have existing CircuitPython libraries so these needed to be written from scratch by reading datasheets, which added significant complexity to the project given the short hackathon timeline.

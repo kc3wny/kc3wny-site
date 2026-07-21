@@ -1,45 +1,34 @@
 {
-  "name": "KC3WNY Website",
-  "version": "1.1.0",
-  "private": true,
-  "scripts": {
-    "prebuild": "node scripts/process-images.mjs",
-    "build": "next build",
-    "dev": "next dev --turbopack",
-    "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check": "biome check --write .",
-    "start": "next start",
-    "process:images": "node scripts/process-images.mjs"
-  },
-  "dependencies": {
-    "@radix-ui/react-slot": "1.2.4",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "gray-matter": "latest",
-    "html-react-parser": "^6.1.2",
-    "isomorphic-dompurify": "^3.14.0",
-    "lucide-react": "^1.16.0",
-    "next": "16.2.6",
-    "next-themes": "^0.4.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "react-markdown": "^10.1.0",
-    "sharp": "^0.34.5",
-    "tailwind-merge": "^3.6.0",
-    "tw-animate-css": "latest"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.4.15",
-    "@tailwindcss/postcss": "^4.3.0",
-    "@types/node": "^25.9.1",
-    "@types/react": "19.2.15",
-    "@types/react-dom": "19.2.3",
-    "postcss": "^8.5.15",
-    "tailwindcss": "^4.3.0",
-    "typescript": "^6.0.3"
-  },
-  "packageManager": "pnpm@11.2.2+sha512.36e6621fad506178936455e70247b8808ef4ec25797a9f437a93281a020484e2607f6a469a22e982987c3dbb8866e3071514ab10a4a1749e06edcd1ec118436f"
+	"name": "KC3WNY Website",
+	"version": "1.1.0",
+	"private": true,
+	"scripts": {
+		"prebuild": "node scripts/process-images.mjs",
+		"build": "next build",
+		"dev": "next dev --turbopack",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check --write .",
+		"start": "next start",
+		"process:images": "node scripts/process-images.mjs"
+	},
+	"dependencies": {
+		"@vercel/analytics": "^2.0.1",
+		"@vercel/speed-insights": "^2.0.0",
+		"gray-matter": "^4.0.3",
+		"html-react-parser": "^6.1.2",
+		"isomorphic-dompurify": "^3.14.0",
+		"next": "16.2.6",
+		"react": "19.2.6",
+		"react-dom": "19.2.6",
+		"sharp": "^0.34.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/node": "^25.9.1",
+		"@types/react": "19.2.15",
+		"@types/react-dom": "19.2.3",
+		"typescript": "^6.0.3"
+	},
+	"packageManager": "pnpm@11.2.2+sha512.36e6621fad506178936455e70247b8808ef4ec25797a9f437a93281a020484e2607f6a469a22e982987c3dbb8866e3071514ab10a4a1749e06edcd1ec118436f"
 }

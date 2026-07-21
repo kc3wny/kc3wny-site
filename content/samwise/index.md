@@ -15,7 +15,7 @@ figures:
   - src: "/api/content-image?path=samwise/LNA replacement2.jpg"
     caption: "LNA replacement in-progress"
     id: "FIG-003"
-  - src: "/api/content-image?path=samwise/Ground Operations Architecture.png"
+  - src: "/api/content-image?path=samwise/Ground Operations Architecture.jpg"
     caption: "Ground operations architecture"
     id: "FIG-004"
   - src: "/api/content-image?path=samwise/Laser cut.jpg"
