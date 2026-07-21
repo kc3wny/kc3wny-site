@@ -16,7 +16,9 @@ export default function SurprisePage() {
 				Surprise!
 			</h1>
 			<p className="byline">
-				You have now been surprised, dazzled, and perhaps delighted. If you were not, please leave a review <Link href="https://www.youtube.com/watch?v=XfELJU1mRMg">here.</Link>
+				You have now been surprised, dazzled, and perhaps delighted. If you were
+				not, please leave a review{" "}
+				<Link href="https://www.youtube.com/watch?v=XfELJU1mRMg">here.</Link>
 			</p>
 
 			<hr />

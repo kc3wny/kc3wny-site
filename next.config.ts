@@ -7,12 +7,20 @@ function getGitInfo() {
 		const commitSha = execSync("git rev-parse HEAD").toString().trim();
 		const commitDate = execSync("git log -1 --format=%cI").toString().trim();
 		const commitCount = execSync("git rev-list --count HEAD").toString().trim();
+		// The home page renders dynamically per-request (for the visitor counter),
+		// which on Vercel runs in a serverless function with no git repo available —
+		// so content/home.md's "last updated" date has to be resolved here, at
+		// build time, and passed through as a plain env var instead.
+		const homeUpdatedAt = execSync("git log -1 --format=%cI -- content/home.md")
+			.toString()
+			.trim();
 
 		return {
 			NEXT_PUBLIC_GIT_COMMIT_SHA: commitSha,
 			NEXT_PUBLIC_GIT_COMMIT_DATE: commitDate,
 			NEXT_PUBLIC_GIT_REVISION: `${commitCount}`,
 			NEXT_PUBLIC_BUILD_DATE: new Date().toISOString(),
+			HOME_CONTENT_UPDATED_AT: homeUpdatedAt,
 		};
 	} catch (error) {
 		console.warn("Failed to get git info:", error);
