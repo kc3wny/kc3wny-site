@@ -91,8 +91,9 @@ export function DocumentFooter({
 					))}
 				</div>
 				<div className="legal">
-					Copyright © 2005–{buildInfo.commitYear} Mason Matich. All rights
-					reserved. &nbsp;·&nbsp; 73 KC3WNY
+					Copyright © 2005–{buildInfo.commitYear}&nbsp;Mason Matich. All rights
+					reserved. &nbsp;·&nbsp; 73 KC3WNY &nbsp;·&nbsp;{" "}
+					<Link href="/surprise">Surprise!</Link>
 				</div>
 			</div>
 		</>

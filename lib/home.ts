@@ -74,6 +74,11 @@ export function getHomeContent(): HomeContent {
 		projectExperience: data.projectExperience,
 		memberships: data.memberships,
 		contact: data.contact,
-		updatedAt: getFileUpdatedAt(homeContentPath),
+		// The home page renders dynamically per-request, so on Vercel this runs in
+		// a serverless function with no git repo available. Prefer the value
+		// resolved at build time (next.config.ts, where git *is* available) and
+		// only fall back to a runtime git/mtime lookup for local dev without it.
+		updatedAt:
+			process.env.HOME_CONTENT_UPDATED_AT || getFileUpdatedAt(homeContentPath),
 	};
 }
