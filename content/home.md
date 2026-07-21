@@ -2,8 +2,8 @@
 title: "Personal File"
 
 biography:
-  intro: "Mason Matich is a mechanical engineering student at Stanford University interested in spacecraft engineering, mechatronics, and RF systems. Over three years of experience in space systems at SpaceX, MIT LL, and Stanford SSI, he has developed skills in deployables design, CAD modeling, antenna design, embedded systems, and project management."
-  summary: "Currently based in Palo Alto, Mason focuses on the design and development of small satellite systems and scaling large deployable solar and antenna structures to fit CubeSat form factors."
+  intro: "Hello! My name is Mason Matich and I am a mechanical engineering student at Stanford University interested in spacecraft engineering, mechatronics, and RF systems. Through previous work on space systems at SpaceX, MIT LL, and Stanford SSI, I have developed skills in deployables design, design for manufacturing, CAD modeling, antenna design, and embedded systems. In my free time I am an active Ham across digital HF, analog VHF/UHF, satellites, and UHF/microwave mesh networking, along with a mildly debilitating interest in repairing old electronic things. I also like to hike, usually with a radio of some sort!"
+  summary: "I'm currently based in Palo Alto, I focus on the design and development of small satellite systems and deployable antennas."
   quickFacts:
     - label: "Location"
       value: "Palo Alto, CA"

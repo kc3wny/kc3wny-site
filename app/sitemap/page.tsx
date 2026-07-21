@@ -3,6 +3,7 @@ import { DocumentWrapper } from "@/components/document-wrapper"
 import { getAllProjects } from "@/lib/projects"
 import { DocumentFooter } from "@/components/document-footer"
 import { buildInfo } from "@/lib/build-info"
+import { parseLocalDate } from "@/lib/utils"
 
 export const metadata = {
   title: "SITEMAP // M. Matich",
@@ -21,14 +22,14 @@ export const metadata = {
   icons: {
     icon: [
       {
-        media: '(prefers-color-scheme: light)',
-        url: '/logo/favicon-light.svg',
-        href: '/logo/favicon-light.svg',
+        media: "(prefers-color-scheme: light)",
+        url: "/logo/favicon-light.svg",
+        href: "/logo/favicon-light.svg",
       },
       {
-        media: '(prefers-color-scheme: dark)',       
-        url: '/logo/favicon-dark.svg',
-        href: '/logo/favicon-dark.svg',
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo/favicon-dark.svg",
+        href: "/logo/favicon-dark.svg",
       },
     ],
   },
@@ -37,81 +38,85 @@ export const metadata = {
 export default function SitemapPage() {
   const projects = getAllProjects()
 
-  const siteStructure = [
-    {
-      section: "1.0",
-      title: "Primary Documents",
-      items: [
-        { href: "/", label: "Personnel File", description: "Main personnel documentation" },
-        { href: "/projects", label: "Project Index", description: "Complete project catalog" },
-        { href: "/sitemap", label: "Sitemap", description: "Site navigation index" },
-      ],
-    },
-    {
-      section: "2.0",
-      title: "Project Documentation",
-      items: projects.map((p) => ({
-        href: `/projects/${p.slug}`,
-        label: p.title,
-        description: `${p.type} documentation`,
-      })),
-    }
-  ]
-
   return (
-    <DocumentWrapper documentNo={buildInfo.getDocumentNumber("SM")} backLink={{ href: "/", label: "Return to Home" }}>
-      {/* Title block */}
-      <div className="border-2 border-foreground mb-8">
-        <div className="bg-foreground text-card px-4 py-2">
-          <span className="text-[10px] tracking-[0.3em] font-sans uppercase">Navigation Document</span>
-        </div>
-        <div className="p-6">
-          <h1 className="text-3xl md:text-4xl font-sans font-bold tracking-tight uppercase mb-2">Site Map</h1>
-          <p className="font-serif italic text-muted-foreground">
-            Complete index of all accessible pages and documentation within this domain.
-          </p>
-        </div>
-      </div>
+    <DocumentWrapper current="Site Map">
+      <hr />
 
-      {/* Detailed sitemap */}
-      {siteStructure.map((section) => (
-        <div key={section.section} className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="bg-primary text-primary-foreground px-3 py-1 font-mono text-sm font-bold">
-              {section.section}
-            </div>
-            <h2 className="text-xl font-sans font-bold uppercase tracking-[0.05em]">{section.title}</h2>
-            <div className="flex-1 h-[2px] bg-foreground" />
-          </div>
+      <h1 className="mh-call" style={{ fontSize: "30px", margin: "6px 0 2px" }}>
+        Site Map
+      </h1>
+      <p className="byline">Every page on kc3wny.com. If you get lost, start here.</p>
 
-          <div className="border-2 border-foreground">
-            <div className="grid grid-cols-[auto_1fr_auto] gap-4 text-[10px] tracking-[0.2em] font-sans uppercase bg-secondary px-4 py-2">
-              <span>Path</span>
-              <span>Description</span>
-              <span>Status</span>
-            </div>
+      <hr />
 
-            {section.items.map((item, idx) => (
-              <Link
-                key={item.href + idx}
-                href={item.href}
-                className="grid grid-cols-[auto_1fr_auto] gap-4 px-4 py-3 border-t border-muted hover:bg-secondary/50 transition-colors items-center group"
-              >
-                <span className="font-mono text-sm text-primary group-hover:underline">
-                  {item.href}
+      <ul className="tree">
+        <li>
+          <Link href="/">Home</Link> <span className="note">&mdash; updated {buildInfo.buildDate}</span>
+          <ul>
+            <li>
+              <Link href="/#bio">Biography</Link>
+            </li>
+            <li>
+              <Link href="/#experience">Experience &amp; Leadership</Link>
+            </li>
+            <li>
+              <Link href="/#skills">Skills</Link>
+            </li>
+            <li>
+              <Link href="/#memberships">Professional Memberships</Link>
+            </li>
+            <li>
+              <Link href="/#contact">Contact</Link>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Link href="/projects">Project Index</Link>{" "}
+          <span className="note">&mdash; /projects &middot; updated {buildInfo.buildDate}</span>
+          <ul>
+            {projects.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/projects/${p.slug}`}>{p.title}</Link>
+                {p.isNew && <span className="new">NEW</span>}{" "}
+                <span className="note">
+                  &middot;{" "}
+                  {parseLocalDate(p.publishedAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                  })}
                 </span>
-                <span className="font-serif text-sm text-muted-foreground">{item.description}</span>
-                <span className="font-mono text-[10px] text-green-600">ACTIVE</span>
-              </Link>
+              </li>
             ))}
-          </div>
-        </div>
-      ))}
+          </ul>
+        </li>
+        <li>
+          External Links
+          <ul>
+            <li>
+              <a href="https://github.com/kc3wny" target="_blank" rel="noopener noreferrer">
+                GitHub &mdash; github.com/kc3wny
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/mason-matich" target="_blank" rel="noopener noreferrer">
+                LinkedIn &mdash; in/mason-matich
+              </a>
+            </li>
+            <li>
+              <a href="/MMatich_Resume.pdf">R&eacute;sum&eacute; &mdash; MMatich_Resume.pdf</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-      <DocumentFooter
-        documentControl={buildInfo.getDocumentNumber("SM")}
-        lastUpdated={buildInfo.buildDate}
-      />
+      <hr className="thin" />
+
+      <p className="small">
+        This site is <b>static HTML</b> &mdash; no database, no build step, no JavaScript required.
+        View source and poke around; that&rsquo;s what the web is for.
+      </p>
+
+      <DocumentFooter />
     </DocumentWrapper>
   )
 }
