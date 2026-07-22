@@ -3,7 +3,7 @@ import { DocumentWrapper } from "@/components/document-wrapper";
 import { DocumentFooter } from "@/components/document-footer";
 
 export const metadata = {
-	title: "surprise @kc3wny.com",
+	title: "surprise@kc3wny.com",
 	robots: { index: false, follow: false },
 };
 

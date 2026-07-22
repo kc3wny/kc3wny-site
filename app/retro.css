@@ -301,7 +301,7 @@
 	letter-spacing: 0.08em;
 	vertical-align: middle;
 	margin-left: 5px;
-	animation: retroblink 1s steps(1) infinite;
+	animation: retroblink 1s steps(1) 5;
 }
 @keyframes retroblink {
 	50% {
@@ -434,6 +434,12 @@
 	width: 100%;
 	height: auto;
 	border: 1px solid #6f6c60;
+}
+/* Paired thumbnails (not standalone .wide figures) get a shared height so a
+   portrait photo next to a landscape one don't leave one box half-empty. */
+.retro-desktop .gallery figure.snap img {
+	height: 240px;
+	object-fit: contain;
 }
 .retro-desktop figure.snap figcaption {
 	font-family: var(--sans);
@@ -580,6 +586,10 @@
 	}
 	.retro-desktop figure.snap {
 		width: 100%;
+	}
+	/* Full-width and stacked here, so there's no neighbor to line up with. */
+	.retro-desktop .gallery figure.snap img {
+		height: auto;
 	}
 	.retro-desktop .entry .dates {
 		float: none;

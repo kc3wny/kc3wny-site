@@ -3,10 +3,10 @@ import { DocumentFooter } from "@/components/document-footer";
 import { WEBRING } from "@/lib/webring";
 
 export const metadata = {
-	title: "webring @kc3wny.com",
+	title: "webring@kc3wny.com",
 	description: "member list for the kc3wny.com webring",
 	openGraph: {
-		title: "webring @kc3wny.com",
+		title: "webring@kc3wny.com",
 		description: "member list for the kc3wny.com webring",
 		type: "website",
 		url: "https://kc3wny.com/webring",

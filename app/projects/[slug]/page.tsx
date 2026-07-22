@@ -166,7 +166,8 @@ function parseMarkdownContent(
 			figureById,
 			photoNumberOf,
 		);
-		return `<figure class="snap${wide ? " wide" : ""}" id="${id}"><img src="${figure.src}" alt="${figure.caption.replace(/"/g, "&quot;")}" /><figcaption><b>Photo ${photoNumberOf(id)}.</b> ${caption}</figcaption></figure>`;
+		const alt = figure.caption.replace(/"/g, "&quot;");
+		return `<figure class="snap${wide ? " wide" : ""}" id="${id}"><a href="${figure.src}" target="_blank" rel="noopener noreferrer"><img src="${figure.src}" alt="${alt}" /></a><figcaption><b>Photo ${photoNumberOf(id)}.</b> ${caption}</figcaption></figure>`;
 	};
 	const renderEmbeds = (ids: string[]): string => {
 		const fresh = ids.filter((id) => !embeddedFigureIds.has(id));
@@ -306,12 +307,18 @@ export default async function ProjectPage({
 			{/* Hero photo */}
 			{project.images?.hero && (
 				<figure className="snap wide">
-					<Image
-						src={project.images.hero}
-						alt={`${project.title} — overview`}
-						width={1200}
-						height={800}
-					/>
+					<a
+						href={project.images.hero}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Image
+							src={project.images.hero}
+							alt={`${project.title} — overview`}
+							width={1200}
+							height={800}
+						/>
+					</a>
 				</figure>
 			)}
 
@@ -325,12 +332,14 @@ export default async function ProjectPage({
 					<div className="gallery">
 						{figures.map((figure) => (
 							<figure className="snap" id={figure.id} key={figure.id}>
-								<Image
-									src={figure.src}
-									alt={figure.caption}
-									width={800}
-									height={600}
-								/>
+								<a href={figure.src} target="_blank" rel="noopener noreferrer">
+									<Image
+										src={figure.src}
+										alt={figure.caption}
+										width={800}
+										height={600}
+									/>
+								</a>
 								<figcaption>
 									<b>{figure.id}</b> {figure.caption}
 								</figcaption>
