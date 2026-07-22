@@ -6,10 +6,10 @@ import { getHomeContent } from "@/lib/home";
 import { parseLocalDate } from "@/lib/utils";
 
 export const metadata = {
-	title: "sitemap @kc3wny.com",
+	title: "sitemap@kc3wny.com",
 	description: "sitemap of all pages",
 	openGraph: {
-		title: "sitemap @kc3wny.com",
+		title: "sitemap@kc3wny.com",
 		description: "sitemap of all pages",
 		type: "website",
 		url: "https://kc3wny.com/sitemap",

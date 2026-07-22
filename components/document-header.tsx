@@ -14,7 +14,7 @@ const NAV_ITEMS: readonly NavItem[] = [
 	{ label: "Projects", href: "/projects" },
 	{ label: "Site Map", href: "/sitemap" },
 	{ label: "Contact", href: "/#contact" },
-	{ label: "Résumé (PDF)", href: "/MMatich_Resume.pdf" },
+	{ label: "Résumé (PDF)", href: "/MMatich_Resume.pdf" },
 ];
 
 type DocumentHeaderProps = {
@@ -50,11 +50,18 @@ export function DocumentHeader({ current }: DocumentHeaderProps) {
 			<nav className="navbar">
 				{NAV_ITEMS.map((item, i) => {
 					const isCurrent = current === item.label;
+					// Hash links (e.g. "Contact") need a plain <a> — next/link's client-side
+					// router no-ops when the URL doesn't change, so clicking "Contact" a
+					// second time in a row (already on /#contact) silently does nothing.
+					// A real anchor always re-triggers the browser's native hash scroll.
+					const isHashLink = item.href.includes("#");
 					return (
 						<span key={item.href}>
 							{i > 0 && <span className="sep">|</span>}
 							{isCurrent ? (
 								<span className="here">[ {item.label} ]</span>
+							) : isHashLink ? (
+								<a href={item.href}>{item.label}</a>
 							) : (
 								<Link href={item.href}>{item.label}</Link>
 							)}

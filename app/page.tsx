@@ -50,7 +50,16 @@ export default async function Home() {
 			<hr />
 
 			{/* Welcome / lead */}
-			<p className="lead">{biography.intro}</p>
+			<p className="lead">
+				{biography.intro.split(/(Mason Matich)/).map((part, i) =>
+					part === "Mason Matich" ? (
+						// biome-ignore lint/suspicious/noArrayIndexKey: static text split, order never changes
+						<b key={i}>{part}</b>
+					) : (
+						part
+					),
+				)}
+			</p>
 
 			<ProjectsSection num={1} />
 			<BiographySection num={2} data={biography} />
