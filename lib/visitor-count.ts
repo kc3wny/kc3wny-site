@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { createClient, type RedisClientType } from "redis";
+import { FALLBACK_COUNT } from "@/lib/visitor-count-constants";
 
 /**
  * Atomically increments and returns the site's visitor counter, backed by
@@ -16,7 +17,6 @@ import { createClient, type RedisClientType } from "redis";
  * local dev without `vercel env pull`) or unreachable, so the page never
  * breaks without it.
  */
-const FALLBACK_COUNT = 42571;
 const RATE_LIMIT_SECONDS = 1;
 
 let client: RedisClientType | undefined;

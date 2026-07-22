@@ -7,15 +7,10 @@ import { SkillsSection } from "@/components/skills-section";
 import { ProfessionalMembershipsSection } from "@/components/professional-memberships-section";
 import { ContactSection } from "@/components/contact-section";
 import { getHomeContent } from "@/lib/home";
-import { incrementVisitorCount } from "@/lib/visitor-count";
+import { VisitorCounter } from "@/components/visitor-counter";
 
-// The visitor counter increments on every request, so this page can't be
-// statically prerendered — it needs to run server-side on each visit.
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
+export default function Home() {
 	const content = getHomeContent();
-	const visitorCount = await incrementVisitorCount();
 	const {
 		biography,
 		skills,
@@ -42,8 +37,7 @@ export default async function Home() {
 					})}
 				</span>
 				<span className="counter">
-					You are visitor no.{" "}
-					<span className="odo">{String(visitorCount).padStart(7, "0")}</span>
+					You are visitor no. <VisitorCounter />
 				</span>
 			</div>
 

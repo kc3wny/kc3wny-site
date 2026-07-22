@@ -7,8 +7,6 @@
    beveled 88x31 badges. Modeled on goliath32 / dvq / circuitousroot.
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
-
 .retro-desktop {
 	--desktop: #b3ae9e;
 	--panel: #ffffff;
@@ -21,9 +19,9 @@
 	--rule: #000000;
 	--bev-lt: #ffffff;
 	--bev-dk: #7d7a6e;
-	--serif: "EB Garamond", Georgia, "Times New Roman", serif;
-	--sans: "EB Garamond", Georgia, serif;
-	--mono: "EB Garamond", Georgia, serif;
+	--serif: var(--font-serif), "EB Garamond", Georgia, "Times New Roman", serif;
+	--sans: var(--font-serif), "EB Garamond", Georgia, serif;
+	--mono: var(--font-serif), "EB Garamond", Georgia, serif;
 
 	background: var(--desktop);
 	min-height: 100vh;
