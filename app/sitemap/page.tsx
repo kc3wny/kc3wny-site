@@ -95,7 +95,9 @@ export default function SitemapPage() {
 					<ul>
 						{projects.map((p) => (
 							<li key={p.slug}>
-								<Link href={`/projects/${p.slug}`}>{p.title}</Link>
+								<Link href={`/projects/${p.slug}`} prefetch={false}>
+									{p.title}
+								</Link>
 								{p.isNew && <span className="new">NEW</span>}{" "}
 								<span className="note">
 									&middot;{" "}

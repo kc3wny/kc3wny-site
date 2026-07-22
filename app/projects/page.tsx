@@ -55,7 +55,9 @@ export default function ProjectsPage() {
 				{projects.map((project) => (
 					<li key={project.slug}>
 						<b>
-							<Link href={`/projects/${project.slug}`}>{project.title}</Link>
+							<Link href={`/projects/${project.slug}`} prefetch={false}>
+								{project.title}
+							</Link>
 						</b>
 						{project.isNew && <span className="new">NEW</span>}
 						{project.award && (

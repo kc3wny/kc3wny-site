@@ -17,7 +17,9 @@ export function ProjectsSection({ num }: ProjectsSectionProps) {
 			<ul className="disc">
 				{projects.map((project) => (
 					<li key={project.slug}>
-						<Link href={`/projects/${project.slug}`}>{project.title}</Link>
+						<Link href={`/projects/${project.slug}`} prefetch={false}>
+							{project.title}
+						</Link>
 						{project.isNew && <span className="new">NEW</span>} —{" "}
 						{project.description}{" "}
 						<span className="small">
