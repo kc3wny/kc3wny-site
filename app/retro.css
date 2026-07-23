@@ -45,6 +45,14 @@
 }
 .retro-desktop .page-inner {
 	padding: 18px 26px 26px;
+	/* With caret browsing enabled, clicking this padding (e.g. left of the
+	   logo) drops a phantom caret anchored to .page-inner itself — not to
+	   any text inside it. user-select:none on the container stops that;
+	   re-enabling it one level down keeps all real content selectable. */
+	user-select: none;
+}
+.retro-desktop .page-inner > * {
+	user-select: text;
 }
 
 /* ---- links ---- */
@@ -67,6 +75,10 @@
 	width: 100%;
 	border-collapse: collapse;
 	margin-bottom: 8px;
+	/* No text lives in this row's left padding/logo cell, but browsers with
+	   caret browsing enabled (F7) will still drop a blinking caret into the
+	   nearest selectable spot there. Nothing here is meant to be selected. */
+	user-select: none;
 }
 .retro-desktop .masthead td {
 	vertical-align: bottom;

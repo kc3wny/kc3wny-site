@@ -1,647 +1,647 @@
 {
-	"me210/adam.png": {
-		"hash": "5659d799cb3f5c2566f436dd72b6f53d",
-		"size": 297948,
-		"optimized": false
-	},
-	"me210/board-with-pucks.jpg": {
-		"hash": "f24601ca3cb2fe33052a3fcaea7aadf9",
-		"size": 295071,
-		"optimized": false
-	},
-	"me210/board.png": {
-		"hash": "0d2c5ea455b4d2dc9cc2f7bcf16cae3e",
-		"size": 100604,
-		"optimized": false
-	},
-	"me210/brooke.jpg": {
-		"hash": "aae58250955a99cb78e16b10dab181c3",
-		"size": 85041,
-		"optimized": false
-	},
-	"me210/bot-on-board.jpg": {
-		"hash": "22a9e9a83a5b8f19f06c0fa92dcec8fe",
-		"size": 588960,
-		"optimized": false
-	},
-	"me210/checkoff-celebration.png": {
-		"hash": "bfdd89912039c8e9678c696bb26a48cf",
-		"size": 489304,
-		"optimized": false
-	},
-	"me210/cutie.jpeg": {
-		"hash": "bcc83bb182ef9cc3aae03b11e0023520",
-		"size": 99460,
-		"optimized": false
-	},
-	"me210/design-front.png": {
-		"hash": "51075532c037f82eef8f6ad32c496706",
-		"size": 67009,
-		"optimized": false
-	},
-	"me210/design-full.png": {
-		"hash": "be84903ef2d87016bb632b380491ea0e",
-		"size": 176187,
-		"optimized": false
-	},
-	"me210/design-side.png": {
-		"hash": "6d9c33a201263ced20b5bca85f46966b",
-		"size": 103221,
-		"optimized": false
-	},
-	"me210/escape-box-fsm.jpg": {
-		"hash": "8d66b6297e4301d52e785f1bdd532c35",
-		"size": 89321,
-		"optimized": false
-	},
-	"me210/fire-fsm.jpg": {
-		"hash": "4b6938b1f0710e1601bf55967bbc5093",
-		"size": 41372,
-		"optimized": false
-	},
-	"me210/follow-to-hogline-fsm.jpg": {
-		"hash": "3b69f7ee08f4a468e879c9f9f6758d6c",
-		"size": 58945,
-		"optimized": false
-	},
-	"me210/group-photo.jpg": {
-		"hash": "3a10629570147a93d4083c3e250b46a2",
-		"size": 274414,
-		"optimized": false
-	},
-	"me210/hero-board-crowd.jpg": {
-		"hash": "4202e1b486894ee1b9c2079d4168169a",
-		"size": 531487,
-		"optimized": false
-	},
-	"me210/ir-circuit.png": {
-		"hash": "e87ec75d122656060a37a441f2475f6f",
-		"size": 13069,
-		"optimized": false
-	},
-	"me210/jackson.png": {
-		"hash": "bf5d50d0fce632afafe16904cf06166c",
-		"size": 292100,
-		"optimized": false
-	},
-	"me210/kicad-global-schematic.png": {
-		"hash": "d07115a947511c0645be9425d34246a5",
-		"size": 255060,
-		"optimized": false
-	},
-	"me210/main-changes.png": {
-		"hash": "1ae952153d941aaf48a9826d7c59d78e",
-		"size": 120512,
-		"optimized": false
-	},
-	"me210/mason.png": {
-		"hash": "b70b49c556c9d0d42368bfcd90375b6d",
-		"size": 196161,
-		"optimized": false
-	},
-	"me210/motor-code.png": {
-		"hash": "a0c79901f9fabbab1f11cc2528e5d50b",
-		"size": 140542,
-		"optimized": false
-	},
-	"me210/motor-drive-circuit.png": {
-		"hash": "0ec6dca0e42657701718491c832033ba",
-		"size": 26546,
-		"optimized": false
-	},
-	"me210/new-design1.jpg": {
-		"hash": "cc7a687f452cc15f473e113bd0f771b2",
-		"size": 375827,
-		"optimized": false
-	},
-	"me210/new-design2.jpg": {
-		"hash": "8a15ec1f16169a64f07b09546cc33a56",
-		"size": 388718,
-		"optimized": false
-	},
-	"me210/old1.jpg": {
-		"hash": "79b22c5dbd3769b77fe8a53fbf480e7a",
-		"size": 139344,
-		"optimized": false
-	},
-	"me210/old2.jpg": {
-		"hash": "f7bbfd3dd630a10abe2509cce591da46",
-		"size": 105428,
-		"optimized": false
-	},
-	"me210/power-rail-config.png": {
-		"hash": "422a87e041687c3635f6c3316c048373",
-		"size": 6667,
-		"optimized": false
-	},
-	"me210/puck-deployment-design.png": {
-		"hash": "b6b41b51196fb897f3e7c50484dfef82",
-		"size": 189697,
-		"optimized": false
-	},
-	"me210/return-to-start-fsm.jpg": {
-		"hash": "3fc8931b974f8f1e70e9ca088c493f8f",
-		"size": 96275,
-		"optimized": false
-	},
-	"me210/stepper-motor-code.png": {
-		"hash": "963f218e18066a007ac13fa84964eba5",
-		"size": 82270,
-		"optimized": false
-	},
-	"me210/tape-sensor-circuit.png": {
-		"hash": "6f8bad2174c8037c3b73d923e401ee85",
-		"size": 10267,
-		"optimized": false
-	},
-	"me210/tape-sensor-code.png": {
-		"hash": "28f190187e756a119649f25e8675519c",
-		"size": 113305,
-		"optimized": false
-	},
-	"me210/testing-toggle-code.png": {
-		"hash": "c4b516c34cd8a8411f34a6d34b9bbcb6",
-		"size": 76186,
-		"optimized": false
-	},
-	"me210/top-level-fsm.jpg": {
-		"hash": "09ea82ad622c2a1a6be9ba90aa983074",
-		"size": 61991,
-		"optimized": false
-	},
-	"me210/ultrasonic-code.png": {
-		"hash": "ef5360e04056c346d745c2aebcea7ed3",
-		"size": 111503,
-		"optimized": false
-	},
-	"me210/ultrasound-pinout.png": {
-		"hash": "8fe96125496aacde0dbc2990cdf8ad7f",
-		"size": 7869,
-		"optimized": false
-	},
-	"meshbase/meshbase_case-milling2.jpg": {
-		"hash": "28f4bd4f50f9958dc7546439a178bce3",
-		"size": 709602,
-		"optimized": false
-	},
-	"meshbase/meshbase_complete.jpg": {
-		"hash": "1a180b82e777bc1dd2a94a1abe86092f",
-		"size": 759577,
-		"optimized": false
-	},
-	"meshbase/meshbase_case-milling1.jpg": {
-		"hash": "b1e39d05fbcb647de87254bb5bfd28e9",
-		"size": 951809,
-		"optimized": false
-	},
-	"meshbase/meshbase_connectors1.jpg": {
-		"hash": "fed21963b52790dc3aa02a7034564c73",
-		"size": 986872,
-		"optimized": false
-	},
-	"meshworks/meshworks_architecture.png": {
-		"hash": "9741e398744e7aaa789e9da10ca00cd6",
-		"size": 264347,
-		"optimized": false
-	},
-	"meshbase/meshbase_stickers.jpg": {
-		"hash": "3a22e810ce2c383aba313fcc66d9b4fd",
-		"size": 914149,
-		"optimized": false
-	},
-	"meshbase/meshbase_connectors2.jpg": {
-		"hash": "278164ec0cf83ec7c4429e37c2c1e7db",
-		"size": 1087547,
-		"optimized": false
-	},
-	"meshbase/meshbase_powder-coat.jpg": {
-		"hash": "bbbf4819dcad15b412370919de2df75e",
-		"size": 1037739,
-		"optimized": false
-	},
-	"meshbase/meshbase_electronic-fitup.jpg": {
-		"hash": "841253bd82e19b04daf6f982c2e09fee",
-		"size": 1460880,
-		"optimized": false
-	},
-	"meshworks/meshworks_build.jpg": {
-		"hash": "cc42f941b0a6e73044fd4ff20bfe01e4",
-		"size": 63475,
-		"optimized": false
-	},
-	"meshworks/meshworks_command-ui.jpg": {
-		"hash": "a4026ee63dbd8cda054446eb1bb3726f",
-		"size": 108347,
-		"optimized": false
-	},
-	"meshworks/meshworks_device-node-demo.jpg": {
-		"hash": "5eb8306079fa3589b438c85bc2bb1689",
-		"size": 172789,
-		"optimized": false
-	},
-	"meshworks/meshworks_device-nodes.jpg": {
-		"hash": "8cd61da5842fff0806000fcc3948f606",
-		"size": 147154,
-		"optimized": false
-	},
-	"meshworks/meshworks_first-architecture.jpg": {
-		"hash": "65116acc68c257b08fc3748e17b7f857",
-		"size": 134661,
-		"optimized": false
-	},
-	"meshworks/meshworks_group-photo.jpg": {
-		"hash": "fec3bd7d288d1a4b2516b88226cb27dd",
-		"size": 142280,
-		"optimized": false
-	},
-	"meshworks/meshworks_lora-first-light.jpg": {
-		"hash": "eb6b7286d59cccb323b0af80c2b8080f",
-		"size": 104137,
-		"optimized": false
-	},
-	"meshworks/meshworks_lora-testbed.jpg": {
-		"hash": "0e66c4e9dd856f04f82335bb1afcc99b",
-		"size": 376066,
-		"optimized": false
-	},
-	"meshworks/meshworks_satellite-damage-assessment.jpg": {
-		"hash": "0316bb9886674857d389c22ecd93e144",
-		"size": 139857,
-		"optimized": false
-	},
-	"meshworks/meshworks_white-board.jpg": {
-		"hash": "decd5dafeab224228eee2844ae7eb649",
-		"size": 56825,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_cad1.png": {
-		"hash": "d7cacfee4901e3a3b673ab072c9b66e6",
-		"size": 287875,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_cad2.png": {
-		"hash": "1f3580bfc4df76d8c9618e36b6e19f43",
-		"size": 336452,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_assembly1.jpg": {
-		"hash": "9da39a972ff9bebd47f0644fc6378ef7",
-		"size": 559373,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_assembly3.jpg": {
-		"hash": "f6211ab8a7b950e0cedd157d242caad5",
-		"size": 729993,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_assembly2.jpg": {
-		"hash": "e43f007e08e61ee9b022f66a8c2d7421",
-		"size": 862866,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_cad3.png": {
-		"hash": "9dba1f4c942930941cd4f0bd1fb54517",
-		"size": 33780,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_cad4.png": {
-		"hash": "13650f9a3c9ce9a5df28300420ee9952",
-		"size": 360568,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_deployed3.jpg": {
-		"hash": "389f83f2449fa73dbf09fc83f5a4b98c",
-		"size": 373779,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_deployed2.jpg": {
-		"hash": "d51103ddbff6d413ce5911ea373f73d7",
-		"size": 815884,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_deployed1.jpg": {
-		"hash": "09d4071d1a8ac0e5821e4eb8948799f6",
-		"size": 1528115,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_deployed4.jpg": {
-		"hash": "ac37e463a8c14ea99e8235d0172ac3ac",
-		"size": 473669,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_element-cutting.jpg": {
-		"hash": "d02ec6c69aaebb6a4f4a4d0928b4d1e8",
-		"size": 524432,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_folding-test.jpg": {
-		"hash": "abfc063943ccdcf921a4a3cef79f9a4e",
-		"size": 684422,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_folded.jpg": {
-		"hash": "9752df80fc2c24c990a573743499f4bc",
-		"size": 632666,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_frame-milling.jpg": {
-		"hash": "69827a306bbf73516b91eec3e373a80d",
-		"size": 1372396,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_frame-powdercoat.jpg": {
-		"hash": "75bb650cf751c5c710299af0d7293037",
-		"size": 878729,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_handle-assembly2.jpg": {
-		"hash": "d4448b5307f71c2ab20202a1ef9b0dac",
-		"size": 895698,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_handle-assembly1.jpg": {
-		"hash": "bed94cd69dfbc2a4ee8df255f529d22e",
-		"size": 980344,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_frame-tapping.jpg": {
-		"hash": "79787cb5849d47709079985d841c9c2d",
-		"size": 1329861,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_hinge-fit-check.jpg": {
-		"hash": "9676e7825014acc592e9ab02d5d6bd7f",
-		"size": 592063,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_hinge.jpg": {
-		"hash": "522a55c11d423319ec27a8e6c7f0d1ac",
-		"size": 769966,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_hinge-milling1.jpg": {
-		"hash": "2015a20c17a591d96ebecea5ae9c2929",
-		"size": 1007081,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_hinge-milling2.jpg": {
-		"hash": "2231456655ae7360c9d47068f9d3da46",
-		"size": 1474929,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_plaque-casting1.jpg": {
-		"hash": "46502c7271305469cee7c1fccafc4138",
-		"size": 1690334,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_plaque-casting2.jpg": {
-		"hash": "c6d89432fb6fb94f3605c9ef508eb3d3",
-		"size": 728486,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_prototype3.jpg": {
-		"hash": "c0df54419d0fc885fc760f7aa36dab75",
-		"size": 456628,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_plaque-facing2.jpg": {
-		"hash": "4c052d43f03d50e08df55ca9ea129c09",
-		"size": 709136,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_plaque-facing1.jpg": {
-		"hash": "3f10ec12a069ff2b7f056ada5d195c3b",
-		"size": 750103,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_prototype1.jpg": {
-		"hash": "ae233852c1e54dd5d5355d7338c4a60b",
-		"size": 953473,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_prototype2.jpg": {
-		"hash": "6eb9ac281bbc64dc5a3cee55f1fa43a8",
-		"size": 1127003,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_prototype4.jpg": {
-		"hash": "77f29206671f4437fcfff9f560da3163",
-		"size": 437866,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_shaft.jpg": {
-		"hash": "13e20099bdb08b78fa2fb7fbe65142c3",
-		"size": 857343,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_shaft-milling.jpg": {
-		"hash": "76e7fbaec06914ae6a3361da96b75e43",
-		"size": 1093880,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_tuning1.jpg": {
-		"hash": "e0c1ac84156d13fa492a1565e02e68e0",
-		"size": 1145223,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_tuning2.jpg": {
-		"hash": "703ae1c3ae2a3c327e6e72c981956df9",
-		"size": 1549046,
-		"optimized": false
-	},
-	"samwise/Block 1.5 transport.jpg": {
-		"hash": "25af15a4f9e6f51865382a553b3c1e34",
-		"size": 345935,
-		"optimized": false
-	},
-	"samwise/Corner rail.png": {
-		"hash": "0ac58e6a8708fd69ea7ada5b94d2565d",
-		"size": 188871,
-		"optimized": false
-	},
-	"samwise/Block 1.5 complete.jpg": {
-		"hash": "4dfbb588ab4f5e8b5f79c52dcb1195a1",
-		"size": 715901,
-		"optimized": false
-	},
-	"samwise/Block 1.5 mass verification.jpg": {
-		"hash": "f3b3240956c3ca91897db6cfcc97cc14",
-		"size": 1152566,
-		"optimized": false
-	},
-	"orbital-dx270/orbital-dx270_tuning3.jpg": {
-		"hash": "619025063525edc05d1245a033aa6237",
-		"size": 1176260,
-		"optimized": false
-	},
-	"samwise/End plate.png": {
-		"hash": "1b45ecc4e1cdef5b3b50f356cc531b11",
-		"size": 296400,
-		"optimized": false
-	},
-	"samwise/Ground Operations Architecture.jpg": {
-		"hash": "93d34863d991c755530f559e3692433c",
-		"size": 589104,
-		"optimized": true
-	},
-	"samwise/GroundOps Room.jpg": {
-		"hash": "d80b2c3514962ca92e57448732f9591b",
-		"size": 552677,
-		"optimized": false
-	},
-	"samwise/Laser full set.jpg": {
-		"hash": "fae5501aaa5eb2450fec8512af7a258b",
-		"size": 554925,
-		"optimized": false
-	},
-	"samwise/Laser cut.jpg": {
-		"hash": "a405201f0936cb598c072b658030c3a8",
-		"size": 1069157,
-		"optimized": false
-	},
-	"samwise/LNA replacement.jpg": {
-		"hash": "fefc950e301b298319d9cde4c73ebc71",
-		"size": 441146,
-		"optimized": false
-	},
-	"samwise/Reaction wheel.png": {
-		"hash": "66c58c3b8f8d0d07a16e230b39b5a58c",
-		"size": 155694,
-		"optimized": false
-	},
-	"samwise/LNA replacement2.jpg": {
-		"hash": "20ad4e6886c083a368f8d5601fece26a",
-		"size": 570420,
-		"optimized": false
-	},
-	"samwise/SAMWISE testing.jpg": {
-		"hash": "375b22068f48edac21d24b918c3c97a3",
-		"size": 759385,
-		"optimized": false
-	},
-	"samwise/SAMWISE celebration.jpg": {
-		"hash": "096e4eba4b4ebcff95a0b1d65e300e9b",
-		"size": 776389,
-		"optimized": false
-	},
-	"samwise/samwise_render.png": {
-		"hash": "b75cbfcd48e7e6051ac46e4a51398d69",
-		"size": 374082,
-		"optimized": false
-	},
-	"samwise/Solar array hinge.png": {
-		"hash": "eac3464c8b7979d4602073c095b865a1",
-		"size": 362317,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_axis-candid.png": {
-		"hash": "24f74045a38a77c4b5dbcc7d771004c1",
-		"size": 308581,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_build1.jpg": {
-		"hash": "36a2efc13f1bc6fd11bbeaea029c3ea6",
-		"size": 903483,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_build2.jpg": {
-		"hash": "5b91706ed526d5351610a08fc8c7266d",
-		"size": 757818,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_final-ant.jpg": {
-		"hash": "8528a57f64973edaa26ef91556fc1ef5",
-		"size": 381703,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_LTA-blimp.jpg": {
-		"hash": "a7acee0748b387f9734ba7e9d0726961",
-		"size": 449802,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_mechanical-diagram.png": {
-		"hash": "fb394b65fdf2e28715010291c49eff07",
-		"size": 164660,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_node-build-network.jpg": {
-		"hash": "26feaa0c24e90b90621f2ff061ab0c0b",
-		"size": 645018,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_install-candid.jpg": {
-		"hash": "16f537b415f549fede3502fbb20c3051",
-		"size": 815537,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_node-diagram.png": {
-		"hash": "c38341cc7fb6216390fdfddd6f2359a3",
-		"size": 313804,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_node-closed.jpg": {
-		"hash": "f305a38ecd9419bba28459432f092555",
-		"size": 542549,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_node-build-power.jpg": {
-		"hash": "db51ba9d847da7d20da4a2c477b40cc9",
-		"size": 580812,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_pano.jpg": {
-		"hash": "2e86bcd4ee6490b468bb97df9b5bd29c",
-		"size": 517627,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_node-open.jpg": {
-		"hash": "6c9191f01f7d1dad09d9348f5adef0b7",
-		"size": 613570,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_power-diagram.png": {
-		"hash": "848ee90ae9303eb5ad3ee9cb4376b829",
-		"size": 295304,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_sector-diagram.png": {
-		"hash": "3771327829d73c1f2aaf815ce7db5744",
-		"size": 114200,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_sector-install1.jpg": {
-		"hash": "45f502ea4b5eab2d306b2c7267ff71fb",
-		"size": 613430,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_sector-install2.jpg": {
-		"hash": "71464ac42af6996b888089aa23d03433",
-		"size": 613519,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_sector-install3.jpg": {
-		"hash": "38741a7cff72ef74b1c4149820305915",
-		"size": 703507,
-		"optimized": false
-	},
-	"testpost/testpost_bay.jpg": {
-		"hash": "fa8696d67f1f0fc7db4360d0592c99be",
-		"size": 301882,
-		"optimized": false
-	},
-	"testpost/testpost_joby.jpg": {
-		"hash": "15a8093c15af2686fae409bd6aad3bd6",
-		"size": 551929,
-		"optimized": false
-	},
-	"site530-AREDN/site530-AREDN_solar-panels.jpg": {
-		"hash": "1e2a2ead2c5fb85ca68254b8a40c9b6a",
-		"size": 766691,
-		"optimized": false
-	},
-	"testpost/testpost_yosemite.jpg": {
-		"hash": "31f89cdddcbbd9b520b58db98d94d929",
-		"size": 728361,
-		"optimized": false
-	}
+  "me210/adam.png": {
+    "hash": "5659d799cb3f5c2566f436dd72b6f53d",
+    "size": 297948,
+    "optimized": false
+  },
+  "me210/board-with-pucks.jpg": {
+    "hash": "f24601ca3cb2fe33052a3fcaea7aadf9",
+    "size": 295071,
+    "optimized": false
+  },
+  "me210/board.png": {
+    "hash": "0d2c5ea455b4d2dc9cc2f7bcf16cae3e",
+    "size": 100604,
+    "optimized": false
+  },
+  "me210/brooke.jpg": {
+    "hash": "aae58250955a99cb78e16b10dab181c3",
+    "size": 85041,
+    "optimized": false
+  },
+  "me210/bot-on-board.jpg": {
+    "hash": "22a9e9a83a5b8f19f06c0fa92dcec8fe",
+    "size": 588960,
+    "optimized": false
+  },
+  "me210/checkoff-celebration.png": {
+    "hash": "bfdd89912039c8e9678c696bb26a48cf",
+    "size": 489304,
+    "optimized": false
+  },
+  "me210/cutie.jpeg": {
+    "hash": "bcc83bb182ef9cc3aae03b11e0023520",
+    "size": 99460,
+    "optimized": false
+  },
+  "me210/design-front.png": {
+    "hash": "51075532c037f82eef8f6ad32c496706",
+    "size": 67009,
+    "optimized": false
+  },
+  "me210/design-full.png": {
+    "hash": "be84903ef2d87016bb632b380491ea0e",
+    "size": 176187,
+    "optimized": false
+  },
+  "me210/design-side.png": {
+    "hash": "6d9c33a201263ced20b5bca85f46966b",
+    "size": 103221,
+    "optimized": false
+  },
+  "me210/escape-box-fsm.jpg": {
+    "hash": "8d66b6297e4301d52e785f1bdd532c35",
+    "size": 89321,
+    "optimized": false
+  },
+  "me210/fire-fsm.jpg": {
+    "hash": "4b6938b1f0710e1601bf55967bbc5093",
+    "size": 41372,
+    "optimized": false
+  },
+  "me210/follow-to-hogline-fsm.jpg": {
+    "hash": "3b69f7ee08f4a468e879c9f9f6758d6c",
+    "size": 58945,
+    "optimized": false
+  },
+  "me210/group-photo.jpg": {
+    "hash": "3a10629570147a93d4083c3e250b46a2",
+    "size": 274414,
+    "optimized": false
+  },
+  "me210/hero-board-crowd.jpg": {
+    "hash": "4202e1b486894ee1b9c2079d4168169a",
+    "size": 531487,
+    "optimized": false
+  },
+  "me210/ir-circuit.png": {
+    "hash": "e87ec75d122656060a37a441f2475f6f",
+    "size": 13069,
+    "optimized": false
+  },
+  "me210/jackson.png": {
+    "hash": "bf5d50d0fce632afafe16904cf06166c",
+    "size": 292100,
+    "optimized": false
+  },
+  "me210/kicad-global-schematic.png": {
+    "hash": "d07115a947511c0645be9425d34246a5",
+    "size": 255060,
+    "optimized": false
+  },
+  "me210/main-changes.png": {
+    "hash": "1ae952153d941aaf48a9826d7c59d78e",
+    "size": 120512,
+    "optimized": false
+  },
+  "me210/mason.png": {
+    "hash": "b70b49c556c9d0d42368bfcd90375b6d",
+    "size": 196161,
+    "optimized": false
+  },
+  "me210/motor-code.png": {
+    "hash": "a0c79901f9fabbab1f11cc2528e5d50b",
+    "size": 140542,
+    "optimized": false
+  },
+  "me210/motor-drive-circuit.png": {
+    "hash": "0ec6dca0e42657701718491c832033ba",
+    "size": 26546,
+    "optimized": false
+  },
+  "me210/new-design1.jpg": {
+    "hash": "cc7a687f452cc15f473e113bd0f771b2",
+    "size": 375827,
+    "optimized": false
+  },
+  "me210/new-design2.jpg": {
+    "hash": "8a15ec1f16169a64f07b09546cc33a56",
+    "size": 388718,
+    "optimized": false
+  },
+  "me210/old1.jpg": {
+    "hash": "79b22c5dbd3769b77fe8a53fbf480e7a",
+    "size": 139344,
+    "optimized": false
+  },
+  "me210/old2.jpg": {
+    "hash": "f7bbfd3dd630a10abe2509cce591da46",
+    "size": 105428,
+    "optimized": false
+  },
+  "me210/power-rail-config.png": {
+    "hash": "422a87e041687c3635f6c3316c048373",
+    "size": 6667,
+    "optimized": false
+  },
+  "me210/puck-deployment-design.png": {
+    "hash": "b6b41b51196fb897f3e7c50484dfef82",
+    "size": 189697,
+    "optimized": false
+  },
+  "me210/return-to-start-fsm.jpg": {
+    "hash": "3fc8931b974f8f1e70e9ca088c493f8f",
+    "size": 96275,
+    "optimized": false
+  },
+  "me210/stepper-motor-code.png": {
+    "hash": "963f218e18066a007ac13fa84964eba5",
+    "size": 82270,
+    "optimized": false
+  },
+  "me210/tape-sensor-circuit.png": {
+    "hash": "6f8bad2174c8037c3b73d923e401ee85",
+    "size": 10267,
+    "optimized": false
+  },
+  "me210/tape-sensor-code.png": {
+    "hash": "28f190187e756a119649f25e8675519c",
+    "size": 113305,
+    "optimized": false
+  },
+  "me210/testing-toggle-code.png": {
+    "hash": "c4b516c34cd8a8411f34a6d34b9bbcb6",
+    "size": 76186,
+    "optimized": false
+  },
+  "me210/top-level-fsm.jpg": {
+    "hash": "09ea82ad622c2a1a6be9ba90aa983074",
+    "size": 61991,
+    "optimized": false
+  },
+  "me210/ultrasonic-code.png": {
+    "hash": "ef5360e04056c346d745c2aebcea7ed3",
+    "size": 111503,
+    "optimized": false
+  },
+  "me210/ultrasound-pinout.png": {
+    "hash": "8fe96125496aacde0dbc2990cdf8ad7f",
+    "size": 7869,
+    "optimized": false
+  },
+  "meshbase/meshbase_case-milling2.jpg": {
+    "hash": "28f4bd4f50f9958dc7546439a178bce3",
+    "size": 709602,
+    "optimized": false
+  },
+  "meshbase/meshbase_complete.jpg": {
+    "hash": "1a180b82e777bc1dd2a94a1abe86092f",
+    "size": 759577,
+    "optimized": false
+  },
+  "meshbase/meshbase_case-milling1.jpg": {
+    "hash": "b1e39d05fbcb647de87254bb5bfd28e9",
+    "size": 951809,
+    "optimized": false
+  },
+  "meshbase/meshbase_connectors1.jpg": {
+    "hash": "fed21963b52790dc3aa02a7034564c73",
+    "size": 986872,
+    "optimized": false
+  },
+  "meshworks/meshworks_architecture.png": {
+    "hash": "9741e398744e7aaa789e9da10ca00cd6",
+    "size": 264347,
+    "optimized": false
+  },
+  "meshbase/meshbase_stickers.jpg": {
+    "hash": "3a22e810ce2c383aba313fcc66d9b4fd",
+    "size": 914149,
+    "optimized": false
+  },
+  "meshbase/meshbase_connectors2.jpg": {
+    "hash": "278164ec0cf83ec7c4429e37c2c1e7db",
+    "size": 1087547,
+    "optimized": false
+  },
+  "meshbase/meshbase_powder-coat.jpg": {
+    "hash": "bbbf4819dcad15b412370919de2df75e",
+    "size": 1037739,
+    "optimized": false
+  },
+  "meshbase/meshbase_electronic-fitup.jpg": {
+    "hash": "841253bd82e19b04daf6f982c2e09fee",
+    "size": 1460880,
+    "optimized": false
+  },
+  "meshworks/meshworks_build.jpg": {
+    "hash": "cc42f941b0a6e73044fd4ff20bfe01e4",
+    "size": 63475,
+    "optimized": false
+  },
+  "meshworks/meshworks_command-ui.jpg": {
+    "hash": "a4026ee63dbd8cda054446eb1bb3726f",
+    "size": 108347,
+    "optimized": false
+  },
+  "meshworks/meshworks_device-node-demo.jpg": {
+    "hash": "5eb8306079fa3589b438c85bc2bb1689",
+    "size": 172789,
+    "optimized": false
+  },
+  "meshworks/meshworks_device-nodes.jpg": {
+    "hash": "8cd61da5842fff0806000fcc3948f606",
+    "size": 147154,
+    "optimized": false
+  },
+  "meshworks/meshworks_first-architecture.jpg": {
+    "hash": "65116acc68c257b08fc3748e17b7f857",
+    "size": 134661,
+    "optimized": false
+  },
+  "meshworks/meshworks_group-photo.jpg": {
+    "hash": "fec3bd7d288d1a4b2516b88226cb27dd",
+    "size": 142280,
+    "optimized": false
+  },
+  "meshworks/meshworks_lora-first-light.jpg": {
+    "hash": "eb6b7286d59cccb323b0af80c2b8080f",
+    "size": 104137,
+    "optimized": false
+  },
+  "meshworks/meshworks_lora-testbed.jpg": {
+    "hash": "0e66c4e9dd856f04f82335bb1afcc99b",
+    "size": 376066,
+    "optimized": false
+  },
+  "meshworks/meshworks_satellite-damage-assessment.jpg": {
+    "hash": "0316bb9886674857d389c22ecd93e144",
+    "size": 139857,
+    "optimized": false
+  },
+  "meshworks/meshworks_white-board.jpg": {
+    "hash": "decd5dafeab224228eee2844ae7eb649",
+    "size": 56825,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_cad1.png": {
+    "hash": "d7cacfee4901e3a3b673ab072c9b66e6",
+    "size": 287875,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_cad2.png": {
+    "hash": "1f3580bfc4df76d8c9618e36b6e19f43",
+    "size": 336452,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_assembly1.jpg": {
+    "hash": "9da39a972ff9bebd47f0644fc6378ef7",
+    "size": 559373,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_assembly3.jpg": {
+    "hash": "f6211ab8a7b950e0cedd157d242caad5",
+    "size": 729993,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_assembly2.jpg": {
+    "hash": "e43f007e08e61ee9b022f66a8c2d7421",
+    "size": 862866,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_cad3.png": {
+    "hash": "9dba1f4c942930941cd4f0bd1fb54517",
+    "size": 33780,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_cad4.png": {
+    "hash": "13650f9a3c9ce9a5df28300420ee9952",
+    "size": 360568,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_deployed3.jpg": {
+    "hash": "389f83f2449fa73dbf09fc83f5a4b98c",
+    "size": 373779,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_deployed2.jpg": {
+    "hash": "d51103ddbff6d413ce5911ea373f73d7",
+    "size": 815884,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_deployed1.jpg": {
+    "hash": "09d4071d1a8ac0e5821e4eb8948799f6",
+    "size": 1528115,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_deployed4.jpg": {
+    "hash": "ac37e463a8c14ea99e8235d0172ac3ac",
+    "size": 473669,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_element-cutting.jpg": {
+    "hash": "d02ec6c69aaebb6a4f4a4d0928b4d1e8",
+    "size": 524432,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_folding-test.jpg": {
+    "hash": "abfc063943ccdcf921a4a3cef79f9a4e",
+    "size": 684422,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_folded.jpg": {
+    "hash": "9752df80fc2c24c990a573743499f4bc",
+    "size": 632666,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_frame-milling.jpg": {
+    "hash": "69827a306bbf73516b91eec3e373a80d",
+    "size": 1372396,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_frame-powdercoat.jpg": {
+    "hash": "75bb650cf751c5c710299af0d7293037",
+    "size": 878729,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_handle-assembly2.jpg": {
+    "hash": "d4448b5307f71c2ab20202a1ef9b0dac",
+    "size": 895698,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_handle-assembly1.jpg": {
+    "hash": "bed94cd69dfbc2a4ee8df255f529d22e",
+    "size": 980344,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_frame-tapping.jpg": {
+    "hash": "79787cb5849d47709079985d841c9c2d",
+    "size": 1329861,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_hinge-fit-check.jpg": {
+    "hash": "9676e7825014acc592e9ab02d5d6bd7f",
+    "size": 592063,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_hinge.jpg": {
+    "hash": "522a55c11d423319ec27a8e6c7f0d1ac",
+    "size": 769966,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_hinge-milling1.jpg": {
+    "hash": "2015a20c17a591d96ebecea5ae9c2929",
+    "size": 1007081,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_hinge-milling2.jpg": {
+    "hash": "2231456655ae7360c9d47068f9d3da46",
+    "size": 1474929,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_plaque-casting1.jpg": {
+    "hash": "46502c7271305469cee7c1fccafc4138",
+    "size": 1690334,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_plaque-casting2.jpg": {
+    "hash": "c6d89432fb6fb94f3605c9ef508eb3d3",
+    "size": 728486,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_prototype3.jpg": {
+    "hash": "c0df54419d0fc885fc760f7aa36dab75",
+    "size": 456628,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_plaque-facing2.jpg": {
+    "hash": "4c052d43f03d50e08df55ca9ea129c09",
+    "size": 709136,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_plaque-facing1.jpg": {
+    "hash": "3f10ec12a069ff2b7f056ada5d195c3b",
+    "size": 750103,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_prototype1.jpg": {
+    "hash": "ae233852c1e54dd5d5355d7338c4a60b",
+    "size": 953473,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_prototype2.jpg": {
+    "hash": "6eb9ac281bbc64dc5a3cee55f1fa43a8",
+    "size": 1127003,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_prototype4.jpg": {
+    "hash": "77f29206671f4437fcfff9f560da3163",
+    "size": 437866,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_shaft.jpg": {
+    "hash": "13e20099bdb08b78fa2fb7fbe65142c3",
+    "size": 857343,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_shaft-milling.jpg": {
+    "hash": "76e7fbaec06914ae6a3361da96b75e43",
+    "size": 1093880,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_tuning1.jpg": {
+    "hash": "e0c1ac84156d13fa492a1565e02e68e0",
+    "size": 1145223,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_tuning2.jpg": {
+    "hash": "703ae1c3ae2a3c327e6e72c981956df9",
+    "size": 1549046,
+    "optimized": false
+  },
+  "samwise/Block 1.5 transport.jpg": {
+    "hash": "25af15a4f9e6f51865382a553b3c1e34",
+    "size": 345935,
+    "optimized": false
+  },
+  "samwise/Corner rail.png": {
+    "hash": "0ac58e6a8708fd69ea7ada5b94d2565d",
+    "size": 188871,
+    "optimized": false
+  },
+  "samwise/Block 1.5 complete.jpg": {
+    "hash": "4dfbb588ab4f5e8b5f79c52dcb1195a1",
+    "size": 715901,
+    "optimized": false
+  },
+  "samwise/Block 1.5 mass verification.jpg": {
+    "hash": "f3b3240956c3ca91897db6cfcc97cc14",
+    "size": 1152566,
+    "optimized": false
+  },
+  "orbital-dx270/orbital-dx270_tuning3.jpg": {
+    "hash": "619025063525edc05d1245a033aa6237",
+    "size": 1176260,
+    "optimized": false
+  },
+  "samwise/End plate.png": {
+    "hash": "1b45ecc4e1cdef5b3b50f356cc531b11",
+    "size": 296400,
+    "optimized": false
+  },
+  "samwise/Ground Operations Architecture.jpg": {
+    "hash": "93d34863d991c755530f559e3692433c",
+    "size": 589104,
+    "optimized": true
+  },
+  "samwise/GroundOps Room.jpg": {
+    "hash": "d80b2c3514962ca92e57448732f9591b",
+    "size": 552677,
+    "optimized": false
+  },
+  "samwise/Laser full set.jpg": {
+    "hash": "fae5501aaa5eb2450fec8512af7a258b",
+    "size": 554925,
+    "optimized": false
+  },
+  "samwise/Laser cut.jpg": {
+    "hash": "a405201f0936cb598c072b658030c3a8",
+    "size": 1069157,
+    "optimized": false
+  },
+  "samwise/LNA replacement.jpg": {
+    "hash": "fefc950e301b298319d9cde4c73ebc71",
+    "size": 441146,
+    "optimized": false
+  },
+  "samwise/Reaction wheel.png": {
+    "hash": "66c58c3b8f8d0d07a16e230b39b5a58c",
+    "size": 155694,
+    "optimized": false
+  },
+  "samwise/LNA replacement2.jpg": {
+    "hash": "20ad4e6886c083a368f8d5601fece26a",
+    "size": 570420,
+    "optimized": false
+  },
+  "samwise/SAMWISE testing.jpg": {
+    "hash": "375b22068f48edac21d24b918c3c97a3",
+    "size": 759385,
+    "optimized": false
+  },
+  "samwise/SAMWISE celebration.jpg": {
+    "hash": "096e4eba4b4ebcff95a0b1d65e300e9b",
+    "size": 776389,
+    "optimized": false
+  },
+  "samwise/samwise_render.png": {
+    "hash": "b75cbfcd48e7e6051ac46e4a51398d69",
+    "size": 374082,
+    "optimized": false
+  },
+  "samwise/Solar array hinge.png": {
+    "hash": "eac3464c8b7979d4602073c095b865a1",
+    "size": 362317,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_axis-candid.png": {
+    "hash": "24f74045a38a77c4b5dbcc7d771004c1",
+    "size": 308581,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_build1.jpg": {
+    "hash": "36a2efc13f1bc6fd11bbeaea029c3ea6",
+    "size": 903483,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_build2.jpg": {
+    "hash": "5b91706ed526d5351610a08fc8c7266d",
+    "size": 757818,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_final-ant.jpg": {
+    "hash": "8528a57f64973edaa26ef91556fc1ef5",
+    "size": 381703,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_LTA-blimp.jpg": {
+    "hash": "a7acee0748b387f9734ba7e9d0726961",
+    "size": 449802,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_mechanical-diagram.png": {
+    "hash": "fb394b65fdf2e28715010291c49eff07",
+    "size": 164660,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_node-build-network.jpg": {
+    "hash": "26feaa0c24e90b90621f2ff061ab0c0b",
+    "size": 645018,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_install-candid.jpg": {
+    "hash": "16f537b415f549fede3502fbb20c3051",
+    "size": 815537,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_node-diagram.png": {
+    "hash": "c38341cc7fb6216390fdfddd6f2359a3",
+    "size": 313804,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_node-closed.jpg": {
+    "hash": "f305a38ecd9419bba28459432f092555",
+    "size": 542549,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_node-build-power.jpg": {
+    "hash": "db51ba9d847da7d20da4a2c477b40cc9",
+    "size": 580812,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_pano.jpg": {
+    "hash": "2e86bcd4ee6490b468bb97df9b5bd29c",
+    "size": 517627,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_node-open.jpg": {
+    "hash": "6c9191f01f7d1dad09d9348f5adef0b7",
+    "size": 613570,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_power-diagram.png": {
+    "hash": "848ee90ae9303eb5ad3ee9cb4376b829",
+    "size": 295304,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_sector-diagram.png": {
+    "hash": "3771327829d73c1f2aaf815ce7db5744",
+    "size": 114200,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_sector-install1.jpg": {
+    "hash": "45f502ea4b5eab2d306b2c7267ff71fb",
+    "size": 613430,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_sector-install2.jpg": {
+    "hash": "71464ac42af6996b888089aa23d03433",
+    "size": 613519,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_sector-install3.jpg": {
+    "hash": "38741a7cff72ef74b1c4149820305915",
+    "size": 703507,
+    "optimized": false
+  },
+  "testpost/testpost_bay.jpg": {
+    "hash": "fa8696d67f1f0fc7db4360d0592c99be",
+    "size": 301882,
+    "optimized": false
+  },
+  "testpost/testpost_joby.jpg": {
+    "hash": "15a8093c15af2686fae409bd6aad3bd6",
+    "size": 551929,
+    "optimized": false
+  },
+  "site530-AREDN/site530-AREDN_solar-panels.jpg": {
+    "hash": "1e2a2ead2c5fb85ca68254b8a40c9b6a",
+    "size": 766691,
+    "optimized": false
+  },
+  "testpost/testpost_yosemite.jpg": {
+    "hash": "31f89cdddcbbd9b520b58db98d94d929",
+    "size": 728361,
+    "optimized": false
+  }
 }
