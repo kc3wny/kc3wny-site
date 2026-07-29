@@ -36,6 +36,12 @@ const nextConfig: NextConfig = {
 		unoptimized: true,
 	},
 
+	// sharp picks its native binary at runtime based on platform, which the bundler
+	// can't statically trace — keeping it external ensures Vercel's output file tracer
+	// copies the whole package (including the linux-x64 libvips binary) instead of
+	// missing it, which otherwise throws ERR_DLOPEN_FAILED in production.
+	serverExternalPackages: ["sharp"],
+
 	// Tell Vercel's output file tracer to include content/ images with the API route bundle
 	outputFileTracingIncludes: {
 		"/api/content-image": ["./content/**/*"],
