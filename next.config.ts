@@ -42,9 +42,20 @@ const nextConfig: NextConfig = {
 	// missing it, which otherwise throws ERR_DLOPEN_FAILED in production.
 	serverExternalPackages: ["sharp"],
 
-	// Tell Vercel's output file tracer to include content/ images with the API route bundle
+	// Tell Vercel's output file tracer to include content/ images with the API route bundle.
+	// sharp's linux-x64/libvips binaries are also forced in here: the tracer can't follow
+	// sharp's runtime platform-detection require() calls, so it silently drops them otherwise —
+	// even with serverExternalPackages set — causing ERR_DLOPEN_FAILED in production.
 	outputFileTracingIncludes: {
-		"/api/content-image": ["./content/**/*"],
+		"/api/content-image": [
+			"./content/**/*",
+			"./node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
+		],
+		"/api/og": [
+			"./node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
+		],
 	},
 
 	experimental: {
