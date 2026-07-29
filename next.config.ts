@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
 
 	experimental: {
 		optimizeCss: true,
+		useTypeScriptCli: true,
 	},
 
 	typescript: {
