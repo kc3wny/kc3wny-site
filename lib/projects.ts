@@ -139,6 +139,18 @@ export function getRecentProjects(count = 3): Project[] {
 	return getAllProjects().slice(0, count);
 }
 
+/** Look up projects by title (case-insensitive), in the given order. Unmatched names are skipped. */
+export function getProjectsByTitles(titles: string[]): Project[] {
+	const allProjects = getAllProjects();
+	return titles
+		.map((title) =>
+			allProjects.find(
+				(project) => project.title.toLowerCase() === title.toLowerCase(),
+			),
+		)
+		.filter((project): project is Project => project !== undefined);
+}
+
 export function getProjectBySlug(slug: string): Project | undefined {
 	return getAllProjects().find((project) => project.slug === slug);
 }

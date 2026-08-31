@@ -1,7 +1,7 @@
 ---
 title: "SSI Satellites SAMWISE"
 type: "Project"
-description: "A student-built 2U technology demonstrator launching Transporter 18!"
+description: "A student-built 2U technology demonstrator"
 publishedAt: "2026-03-20"
 new: true
 heroImage: "/api/content-image?path=samwise/samwise_render.png"

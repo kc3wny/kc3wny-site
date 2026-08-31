@@ -462,6 +462,64 @@
 	color: var(--accent);
 }
 
+/* ---- project list (thumb + text, home + index) ---- */
+.retro-desktop ul.project-list {
+	list-style: none;
+	padding: 0;
+	margin: 10px 0;
+}
+.retro-desktop ul.project-list > li {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin: 14px 0;
+	padding-bottom: 14px;
+	border-bottom: 1px dotted #9c998c;
+}
+.retro-desktop ul.project-list > li:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+.retro-desktop .project-thumb {
+	display: block;
+	flex-shrink: 0;
+	width: 64px;
+	height: 64px;
+	border: 2px solid #000;
+	background: #efece1;
+	padding: 3px;
+}
+.retro-desktop ul.project-list.index .project-thumb {
+	width: 88px;
+	height: 88px;
+}
+.retro-desktop .project-thumb img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border: 1px solid #6f6c60;
+}
+.retro-desktop .project-thumb.placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--mono);
+	font-size: 10px;
+	color: var(--faint);
+	text-align: center;
+}
+.retro-desktop .project-list-body {
+	flex: 1;
+	min-width: 0;
+}
+.retro-desktop .project-list-body .note {
+	color: var(--faint);
+	font-size: 0.9em;
+	font-style: italic;
+	margin: 4px 0 0;
+}
+
 /* ---- footer ---- */
 .retro-desktop .foot {
 	margin-top: 24px;
@@ -605,6 +663,14 @@
 		float: none;
 		display: block;
 		margin-bottom: 3px;
+	}
+	.retro-desktop .project-thumb {
+		width: 60px;
+		height: 60px;
+	}
+	.retro-desktop ul.project-list.index .project-thumb {
+		width: 72px;
+		height: 72px;
 	}
 	.retro-desktop dl.facts {
 		grid-template-columns: 1fr;

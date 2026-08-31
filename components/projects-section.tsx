@@ -1,39 +1,68 @@
+import Image from "next/image";
 import Link from "next/link";
-import { getRecentProjects } from "@/lib/projects";
+import { getProjectsByTitles } from "@/lib/projects";
 import { SectionHeading } from "@/components/section-heading";
 import { parseLocalDate } from "@/lib/utils";
 
 type ProjectsSectionProps = {
 	readonly num: number;
+	readonly names: string[];
 };
 
-/** Recent projects — a short bulleted list; full catalog lives at /projects. */
-export function ProjectsSection({ num }: ProjectsSectionProps) {
-	const projects = getRecentProjects(3);
+/** Selected projects — a short list with thumbnails; full catalog lives at /projects. */
+export function ProjectsSection({ num, names }: ProjectsSectionProps) {
+	const projects = getProjectsByTitles(names);
 
 	return (
 		<>
-			<SectionHeading num={num} title="Recent Projects" id="projects" />
-			<ul className="disc">
+			<SectionHeading num={num} title="Selected Projects" id="projects" />
+			<ul className="project-list">
 				{projects.map((project) => (
 					<li key={project.slug}>
-						<Link href={`/projects/${project.slug}`} prefetch={false}>
-							{project.title}
+						<Link
+							href={`/projects/${project.slug}`}
+							prefetch={false}
+							className={
+								project.images?.hero
+									? "project-thumb"
+									: "project-thumb placeholder"
+							}
+						>
+							{project.images?.hero ? (
+								<Image
+									src={project.images.hero}
+									alt={`${project.title} — thumbnail`}
+									width={84}
+									height={84}
+								/>
+							) : (
+								"NO IMG"
+							)}
 						</Link>
-						{project.isNew && <span className="new">NEW</span>} —{" "}
-						{project.description}{" "}
-						<span className="small">
-							(
-							{parseLocalDate(project.publishedAt).toLocaleDateString("en-US", {
-								year: "numeric",
-								month: "short",
-							})}
-							)
-						</span>
+						<div className="project-list-body">
+							<Link href={`/projects/${project.slug}`} prefetch={false}>
+								{project.title}
+							</Link>
+							{project.isNew && <span className="new">NEW</span>} —{" "}
+							{project.description}{" "}
+							<span className="medium">
+								(
+								<b>
+									{parseLocalDate(project.publishedAt).toLocaleDateString(
+										"en-US",
+										{
+											year: "numeric",
+											month: "short",
+										},
+									)}
+								</b>
+								)
+							</span>
+						</div>
 					</li>
 				))}
 			</ul>
-			<p className="small">
+			<p className="medium">
 				☞ See all write-ups in the <Link href="/projects">Project Index</Link>.
 			</p>
 		</>

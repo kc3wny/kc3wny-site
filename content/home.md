@@ -1,5 +1,5 @@
 ---
-title: "Personal File"
+title: "Home Page"
 
 biography:
   intro: "Hello! My name is Mason Matich and I am a mechanical engineering student at Stanford University interested in spacecraft engineering, mechatronics, and RF systems. Through previous work on space systems at SpaceX, MIT LL, and Stanford SSI, I have developed skills in deployables design, design for manufacturing, CAD modeling, antenna design, and embedded systems. In my free time I am an active Ham across digital HF, analog VHF/UHF, satellites, and UHF/microwave mesh networking, along with a mildly debilitating interest in repairing old electronic things. I also like to hike, usually with a radio of some sort!"
@@ -20,7 +20,7 @@ skills:
   - category: "Programming"
     items: ["Simulink", "MatLab", "Python", "Git"]
   - category: "Manufacturing"
-    items: ["3D Printing (FDM/SLA)", "CNC Milling", "Fiber Laser Cutting", "Sheet Metal Fabrication", "Acetylene Welding"]
+    items: ["3D Printing (FDM/SLA)", "CNC Milling", "Fiber Laser Cutting", "Sheet Metal Fabrication", "Injection Molding"]
   - category: "Prototyping"
     items: ["Motor Control", "Soldering (SMD/THT)", "Circuit Debugging", "Real-Time Microcontrollers", "Embedded systems (Arduino/RP2040)", "UART/i2c/SPI"]
   - category: "Amateur Radio"
@@ -31,16 +31,16 @@ workExperience:
     org: "SpaceX"
     location: "Hawthorne, CA"
     duration: "March 2026 — Sept 2026"
-    description: "Responsible engineer for Starshield mechanical products, tasks cover lifecycle testing, reliability improvements, and optimizations for rate production."
+    description: "Responsible engineer for Starshield mechanical products, tasks cover initial design, accelerated lifecycle testing, reliability improvements, and rate production optimizations of antennas."
   - role: "Build Reliability Engineering (BRE) Intern, Starship"
     org: "SpaceX"
     location: "Brownsville, TX"
-    duration: "Jun 2025 — Sep 2025"
-    description: "Responsible engineer for a portable Starship FOD control device for vehicle production (GSE). Tasks cover full lifecycle from initial design to serialized part production, including mechanical design, electrical design, and software development."
+    duration: "Jun 2025 — Sept 2025"
+    description: "Responsible engineer for a portable Starship FOD control device for vehicle production (Ground Support Equipment). Tasks cover full lifecycle from initial design to serialized part production, including mechanical design, electrical design, and software development."
   - role: "Teaching Assistant, BWSI Build a CubeSat Challenge"
-    org: "MIT Lincoln Laboratory (nextSource)"
+    org: "MIT Lincoln Laboratory"
     location: "Virtual"
-    duration: "Sep 2025 — Mar 2026\nSep 2024 — Mar 2025\nSep 2023 — Apr 2024"
+    duration: "Sept 2023 — Present"
     description: "National high school competition of ∼40 teams to develop 1U CubeSat with an optical payload for a simulated disaster response mission. Create, test, and procure CubeSat hardware kits, update and expand online coursework. Manage team progress, answer forum questions, and host weekly office hours with student participants."
   - role: "Space Systems Intern, Advanced Electro-Optical Systems (G99)"
     org: "MIT Lincoln Laboratory"
@@ -49,24 +49,12 @@ workExperience:
     description: "Interdisciplinary group focusing on rapidly developing and field-testing terrestrial and space surveillance systems using technologies like electro-optics, infrared sensors, novel focal plane arrays, embedded processors, and image processing. Personal contributions include motion control tasks related to a satellite camera focus mechanism."
 
 projectExperience:
-  - name: "Satellites CoLead"
+  - name: "Satellites Co-Lead"
     org: "Stanford Student Space Initiative - Satellites Team"
     location: "Stanford, CA"
     type: "Project Management"
-    duration: "Apr 2025 — Present"
-    description: "Lead of 40 person SSI Satellites team for the 2U SAMWISE program to launch Oct. 2025 on SpaceX Transporter 15. General program management, including budget, schedule, and team organization. Tasks from prior work as Structures Co-Lead and Mission Control Lead are carried over to this role."
-  - name: "Mission Control Lead"
-    org: "Stanford Student Space Initiative - Satellites Team"
-    location: "Stanford, CA"
-    type: "Technical Lead"
-    duration: "Sep 2023 — Mar 2025"
-    description: "Management of all command and control (C2) tasks, including ground control systems, satellite health monitoring, orbit tasking, and telemetry and mission data storage and processing. Personal technical contributions include the design and deployment of a 2400 MHz S-band ground station for high-speed photo downlink, reliability improvements to the UHF ground station, and the ground control and data storage architecture."
-  - name: "Structures CoLead"
-    org: "Stanford Student Space Initiative - Satellites Team"
-    location: "Stanford, CA"
-    type: "Technical Lead"
-    duration: "Sep 2023 — Mar 2025"
-    description: "Management of bus development, heat management structures, camera baffles, deployables, and satellite integration/assembly. Personal technical contributions include the redesign of bus components for laser cutting and the design/manufacture of hinges for the double-fold solar array using CNC milling and metal 3D printing."
+    duration: "Sep 2023 — March 2026"
+    description: "Progressed from Structures Co-Lead and Mission Control Lead in 2024-2025 to Satellites Co-Lead in 2025-2026. Led work across a 40-person for the 2U SAMWISE program, intended to launch Oct. 2026 on SpaceX Transporter 18. Designed and deployed a 2400 MHz S-band ground station for high-speed photo downlink and built out the ground control and mission data storage architecture. Designed and manufactured the double-fold solar array hinges using CNC milling and metal 3D printing. In final role was responsible for overall program management, including budget, schedule, and team organization."
   - name: "President, W6YX Radio Club"
     org: "Stanford University"
     location: "Stanford, CA"
@@ -79,6 +67,11 @@ projectExperience:
     type: "Hackathon"
     duration: "Feb 2024"
     description: "Mesh network of LoRa radio terminals for long-range resilient emergency communications in disaster scenarios. Terminal NLP processing and summarization of voice messages for a text-only data mode to save bandwidth. Automated emergency manager dashboard for reduced information overload at emergency management centers. Personal contributions include the LoRa modem driver, mesh network routing algorithm, and terminal case design."
+
+selectedProjects:
+  - "SSI Satellites SAMWISE"
+  - "W6YX-AREDN"
+  - "Orbital DX/270"
 
 memberships:
   - name: "IEEE"

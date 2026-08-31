@@ -56,6 +56,8 @@ export interface HomeContent {
 	projectExperience: ProjectExperience[];
 	memberships: Membership[];
 	contact: ContactChannel[];
+	/** Project titles (must match content/<slug>/index.md `title`) to feature on the home page, in order. */
+	selectedProjects: string[];
 	/** ISO timestamp of the last git commit that touched content/home.md (falls back to filesystem mtime). */
 	updatedAt: string;
 }
@@ -74,6 +76,7 @@ export function getHomeContent(): HomeContent {
 		projectExperience: data.projectExperience,
 		memberships: data.memberships,
 		contact: data.contact,
+		selectedProjects: data.selectedProjects || [],
 		// The home page renders dynamically per-request, so on Vercel this runs in
 		// a serverless function with no git repo available. Prefer the value
 		// resolved at build time (next.config.ts, where git *is* available) and

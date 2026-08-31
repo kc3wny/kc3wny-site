@@ -18,6 +18,7 @@ export default function Home() {
 		projectExperience,
 		memberships,
 		contact,
+		selectedProjects,
 		updatedAt,
 	} = content;
 	const updatedDate = new Date(updatedAt);
@@ -45,24 +46,28 @@ export default function Home() {
 
 			{/* Welcome / lead */}
 			<p className="lead">
-				{biography.intro.split(/(Mason Matich)/).map((part, i) =>
-					part === "Mason Matich" ? (
-						// biome-ignore lint/suspicious/noArrayIndexKey: static text split, order never changes
-						<b key={i}>{part}</b>
-					) : (
-						part
-					),
-				)}
+				{biography.intro
+					.split(/(Mason Matich|SpaceX|MIT LL|Stanford SSI)/)
+					.map((part, i) =>
+						["Mason Matich", "SpaceX", "MIT LL", "Stanford SSI"].includes(
+							part,
+						) ? (
+							// biome-ignore lint/suspicious/noArrayIndexKey: static text split, order never changes
+							<b key={i}>{part}</b>
+						) : (
+							part
+						),
+					)}
 			</p>
 
-			<ProjectsSection num={1} />
-			<BiographySection num={2} data={biography} />
+			<ProjectsSection num={1} names={selectedProjects} />
 			<ExperienceSection
-				num={3}
+				num={2}
 				workData={workExperience}
 				projectData={projectExperience}
 			/>
-			<SkillsSection num={4} data={skills} />
+			<SkillsSection num={3} data={skills} />
+			<BiographySection num={4} data={biography} />
 			<ProfessionalMembershipsSection num={5} data={memberships} />
 			<ContactSection num={6} data={contact} />
 

@@ -40,10 +40,10 @@ export function ExperienceSection({
 			{workData.map((job) => (
 				<div key={job.role} className="entry">
 					<span className="dates">{job.duration}</span>
-					<div className="role">{job.role}</div>
-					<div className="org">
-						{job.org} — {job.location}
+					<div className="role">
+						{job.org} — {job.role}
 					</div>
+					<div className="org">{job.location}</div>
 					<p>{job.description}</p>
 				</div>
 			))}
