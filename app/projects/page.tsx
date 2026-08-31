@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { DocumentWrapper } from "@/components/document-wrapper";
 import { getAllProjects } from "@/lib/projects";
@@ -51,20 +52,40 @@ export default function ProjectsPage() {
 
 			<hr />
 
-			<ul className="tree">
+			<ul className="project-list index">
 				{projects.map((project) => (
 					<li key={project.slug}>
-						<b>
-							<Link href={`/projects/${project.slug}`} prefetch={false}>
-								{project.title}
-							</Link>
-						</b>
-						{project.isNew && <span className="new">NEW</span>}
-						{project.award && (
-							<span className="tag award">{project.award}</span>
-						)}
-						<ul>
-							<li className="note">
+						<Link
+							href={`/projects/${project.slug}`}
+							prefetch={false}
+							className={
+								project.images?.hero
+									? "project-thumb"
+									: "project-thumb placeholder"
+							}
+						>
+							{project.images?.hero ? (
+								<Image
+									src={project.images.hero}
+									alt={`${project.title} — thumbnail`}
+									width={108}
+									height={108}
+								/>
+							) : (
+								"NO IMG"
+							)}
+						</Link>
+						<div className="project-list-body">
+							<b>
+								<Link href={`/projects/${project.slug}`} prefetch={false}>
+									{project.title}
+								</Link>
+							</b>
+							{project.isNew && <span className="new">NEW</span>}
+							{project.award && (
+								<span className="tag award">{project.award}</span>
+							)}
+							<p className="note">
 								<b>
 									{parseLocalDate(project.publishedAt).toLocaleDateString(
 										"en-US",
@@ -75,8 +96,8 @@ export default function ProjectsPage() {
 									)}
 								</b>{" "}
 								· {project.type} — {project.description}
-							</li>
-						</ul>
+							</p>
+						</div>
 					</li>
 				))}
 			</ul>

@@ -46,14 +46,18 @@ export default function Home() {
 
 			{/* Welcome / lead */}
 			<p className="lead">
-				{biography.intro.split(/(Mason Matich)/).map((part, i) =>
-					part === "Mason Matich" ? (
-						// biome-ignore lint/suspicious/noArrayIndexKey: static text split, order never changes
-						<b key={i}>{part}</b>
-					) : (
-						part
-					),
-				)}
+				{biography.intro
+					.split(/(Mason Matich|SpaceX|MIT LL|Stanford SSI)/)
+					.map((part, i) =>
+						["Mason Matich", "SpaceX", "MIT LL", "Stanford SSI"].includes(
+							part,
+						) ? (
+							// biome-ignore lint/suspicious/noArrayIndexKey: static text split, order never changes
+							<b key={i}>{part}</b>
+						) : (
+							part
+						),
+					)}
 			</p>
 
 			<ProjectsSection num={1} names={selectedProjects} />
