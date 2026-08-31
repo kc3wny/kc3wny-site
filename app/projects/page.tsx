@@ -65,13 +65,15 @@ export default function ProjectsPage() {
 						)}
 						<ul>
 							<li className="note">
-								{parseLocalDate(project.publishedAt).toLocaleDateString(
-									"en-US",
-									{
-										year: "numeric",
-										month: "short",
-									},
-								)}{" "}
+								<b>
+									{parseLocalDate(project.publishedAt).toLocaleDateString(
+										"en-US",
+										{
+											year: "numeric",
+											month: "short",
+										},
+									)}
+								</b>{" "}
 								· {project.type} — {project.description}
 							</li>
 						</ul>

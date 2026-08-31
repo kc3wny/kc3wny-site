@@ -1,19 +1,20 @@
 import Link from "next/link";
-import { getRecentProjects } from "@/lib/projects";
+import { getProjectsByTitles } from "@/lib/projects";
 import { SectionHeading } from "@/components/section-heading";
 import { parseLocalDate } from "@/lib/utils";
 
 type ProjectsSectionProps = {
 	readonly num: number;
+	readonly names: string[];
 };
 
-/** Recent projects — a short bulleted list; full catalog lives at /projects. */
-export function ProjectsSection({ num }: ProjectsSectionProps) {
-	const projects = getRecentProjects(3);
+/** Selected projects — a short bulleted list; full catalog lives at /projects. */
+export function ProjectsSection({ num, names }: ProjectsSectionProps) {
+	const projects = getProjectsByTitles(names);
 
 	return (
 		<>
-			<SectionHeading num={num} title="Recent Projects" id="projects" />
+			<SectionHeading num={num} title="Selected Projects" id="projects" />
 			<ul className="disc">
 				{projects.map((project) => (
 					<li key={project.slug}>
@@ -22,18 +23,20 @@ export function ProjectsSection({ num }: ProjectsSectionProps) {
 						</Link>
 						{project.isNew && <span className="new">NEW</span>} —{" "}
 						{project.description}{" "}
-						<span className="small">
+						<span className="medium">
 							(
-							{parseLocalDate(project.publishedAt).toLocaleDateString("en-US", {
-								year: "numeric",
-								month: "short",
-							})}
+							<b>
+								{parseLocalDate(project.publishedAt).toLocaleDateString("en-US", {
+									year: "numeric",
+									month: "short",
+								})}
+							</b>
 							)
 						</span>
 					</li>
 				))}
 			</ul>
-			<p className="small">
+			<p className="medium">
 				☞ See all write-ups in the <Link href="/projects">Project Index</Link>.
 			</p>
 		</>

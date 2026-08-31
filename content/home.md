@@ -1,5 +1,5 @@
 ---
-title: "Personal File"
+title: "Home Page"
 
 biography:
   intro: "Hello! My name is Mason Matich and I am a mechanical engineering student at Stanford University interested in spacecraft engineering, mechatronics, and RF systems. Through previous work on space systems at SpaceX, MIT LL, and Stanford SSI, I have developed skills in deployables design, design for manufacturing, CAD modeling, antenna design, and embedded systems. In my free time I am an active Ham across digital HF, analog VHF/UHF, satellites, and UHF/microwave mesh networking, along with a mildly debilitating interest in repairing old electronic things. I also like to hike, usually with a radio of some sort!"
@@ -36,7 +36,7 @@ workExperience:
     org: "SpaceX"
     location: "Brownsville, TX"
     duration: "Jun 2025 — Sep 2025"
-    description: "Responsible engineer for a portable Starship FOD control device for vehicle production (GSE). Tasks cover full lifecycle from initial design to serialized part production, including mechanical design, electrical design, and software development."
+    description: "Responsible engineer for a portable Starship FOD control device for vehicle production (Ground Support Equipment). Tasks cover full lifecycle from initial design to serialized part production, including mechanical design, electrical design, and software development."
   - role: "Teaching Assistant, BWSI Build a CubeSat Challenge"
     org: "MIT Lincoln Laboratory (nextSource)"
     location: "Virtual"
@@ -79,6 +79,11 @@ projectExperience:
     type: "Hackathon"
     duration: "Feb 2024"
     description: "Mesh network of LoRa radio terminals for long-range resilient emergency communications in disaster scenarios. Terminal NLP processing and summarization of voice messages for a text-only data mode to save bandwidth. Automated emergency manager dashboard for reduced information overload at emergency management centers. Personal contributions include the LoRa modem driver, mesh network routing algorithm, and terminal case design."
+
+selectedProjects:
+  - "SSI Satellites SAMWISE"
+  - "W6YX-AREDN"
+  - "Orbital DX/270"
 
 memberships:
   - name: "IEEE"

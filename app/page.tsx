@@ -18,6 +18,7 @@ export default function Home() {
 		projectExperience,
 		memberships,
 		contact,
+		selectedProjects,
 		updatedAt,
 	} = content;
 	const updatedDate = new Date(updatedAt);
@@ -55,14 +56,14 @@ export default function Home() {
 				)}
 			</p>
 
-			<ProjectsSection num={1} />
-			<BiographySection num={2} data={biography} />
+			<ProjectsSection num={1} names={selectedProjects} />
 			<ExperienceSection
-				num={3}
+				num={2}
 				workData={workExperience}
 				projectData={projectExperience}
 			/>
-			<SkillsSection num={4} data={skills} />
+			<SkillsSection num={3} data={skills} />
+			<BiographySection num={4} data={biography} />
 			<ProfessionalMembershipsSection num={5} data={memberships} />
 			<ContactSection num={6} data={contact} />
 

@@ -1,7 +1,7 @@
 ---
 title: "Orbital DX/270"
 type: "Project"
-description: "ME 103 Final Project- Portable dual-band antenna for contingency satellite communication"
+description: "ME 103 Final Project- Portable dual-band satellite antenna"
 publishedAt: "2025-06-08"
 heroImage: "/api/content-image?path=orbital-dx270/orbital-dx270_deployed3.jpg"
 figures:
