@@ -3,8 +3,41 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const MIN_WIDTH = 32;
-const MAX_WIDTH = 2400;
+/**
+ * `w` snaps to one of these instead of honouring any integer. Each distinct
+ * width is a separate sharp re-encode of a full-size source, so leaving it
+ * open lets one client force thousands of them (and blow out the CDN cache)
+ * by walking `w=1,2,3…`.
+ */
+const ALLOWED_WIDTHS = [120, 240, 360, 480, 720, 960, 1200, 1600, 2400];
+
+const CONTENT_ROOT = path.resolve(process.cwd(), "content");
+
+/**
+ * Only these are servable. Without an allowlist this route is a general
+ * "read any file under content/" endpoint — sharp rejects non-images, but
+ * that's an accident of sharp's parser rather than a rule we enforce.
+ */
+const ALLOWED_EXTENSIONS = new Set([
+	".jpg",
+	".jpeg",
+	".png",
+	".webp",
+	".avif",
+	".gif",
+	".svg",
+]);
+
+/**
+ * True if the resolved file really sits inside content/. Comparing resolved
+ * paths with a trailing separator matters: a plain `startsWith(CONTENT_ROOT)`
+ * would also accept a sibling directory like `content-backup/`.
+ */
+function isInsideContentRoot(fullPath: string): boolean {
+	return (
+		fullPath === CONTENT_ROOT || fullPath.startsWith(CONTENT_ROOT + path.sep)
+	);
+}
 
 /**
  * `inline` (not `attachment`) so the image still renders in the tab instead
@@ -41,33 +74,48 @@ export async function GET(
 	const { path: pathSegments } = await params;
 	const imagePath = pathSegments.join("/");
 	const widthParam = request.nextUrl.searchParams.get("w");
-	const width = widthParam ? Number.parseInt(widthParam, 10) : undefined;
-	const targetWidth =
-		width && Number.isFinite(width)
-			? Math.min(Math.max(width, MIN_WIDTH), MAX_WIDTH)
-			: undefined;
+	const requestedWidth = widthParam
+		? Number.parseInt(widthParam, 10)
+		: Number.NaN;
+	const targetWidth = Number.isFinite(requestedWidth)
+		? (ALLOWED_WIDTHS.find((w) => w >= requestedWidth) ??
+			ALLOWED_WIDTHS[ALLOWED_WIDTHS.length - 1])
+		: undefined;
 
-	// Security: prevent directory traversal
-	const safePath = path.normalize(imagePath).replace(/^(\.\.[/\\])+/, "");
-	const fullPath = path.join(process.cwd(), "content", safePath);
-
-	// Ensure the file is within the content directory
-	if (!fullPath.startsWith(path.join(process.cwd(), "content"))) {
+	// Reject dot-segments outright rather than trying to neutralize them —
+	// this also keeps content/.originals/ (unprocessed camera files, EXIF and
+	// GPS intact) unreachable, since it's only a backup, never published.
+	if (pathSegments.some((segment) => segment.startsWith("."))) {
 		return new NextResponse("Invalid path", { status: 403 });
+	}
+
+	const fullPath = path.resolve(CONTENT_ROOT, imagePath);
+	if (!isInsideContentRoot(fullPath)) {
+		return new NextResponse("Invalid path", { status: 403 });
+	}
+
+	const ext = path.extname(fullPath).toLowerCase();
+	if (!ALLOWED_EXTENSIONS.has(ext)) {
+		return new NextResponse("Unsupported image type", { status: 415 });
 	}
 
 	try {
 		const fileBuffer = fs.readFileSync(fullPath);
-		const ext = path.extname(fullPath).toLowerCase();
 		const baseName = path.basename(fullPath, ext);
 
-		// For SVG files, just return the original
+		// SVGs are served as-is (rasterizing them would defeat the point), and
+		// an SVG rendered on our own origin can carry <script>. These files are
+		// author-written, but the sandbox + null CSP means even a malicious one
+		// that landed in content/ couldn't run script or phone home.
 		if (ext === ".svg") {
 			return new NextResponse(fileBuffer, {
 				headers: {
 					"Content-Type": "image/svg+xml",
 					"Cache-Control": "public, max-age=31536000, immutable",
 					"Content-Disposition": contentDisposition(`${baseName}${ext}`),
+					"Content-Security-Policy":
+						"default-src 'none'; style-src 'unsafe-inline'; sandbox",
+					"X-Content-Type-Options": "nosniff",
 				},
 			});
 		}
@@ -90,6 +138,7 @@ export async function GET(
 				// Output is always re-encoded to JPEG here, so use a .jpg name
 				// regardless of the source extension.
 				"Content-Disposition": contentDisposition(`${baseName}.jpg`),
+				"X-Content-Type-Options": "nosniff",
 			},
 		});
 	} catch (error) {
