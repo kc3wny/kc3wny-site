@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DocumentWrapper } from "@/components/document-wrapper";
 import { getAllProjects } from "@/lib/projects";
+import { getAllPhotos } from "@/lib/photography";
 import { DocumentFooter } from "@/components/document-footer";
 import { getHomeContent } from "@/lib/home";
 import { parseLocalDate } from "@/lib/utils";
@@ -45,6 +46,7 @@ function formatDate(iso: string): string {
 
 export default function SitemapPage() {
 	const projects = getAllProjects();
+	const photos = getAllPhotos();
 	const home = getHomeContent();
 	// Most recently touched project file, so the "updated" note on the index reflects real edits.
 	const projectsUpdatedAt = projects.reduce(
@@ -109,6 +111,10 @@ export default function SitemapPage() {
 							</li>
 						))}
 					</ul>
+				</li>
+				<li>
+					<Link href="/photography">Photography</Link>{" "}
+					<span className="note">&mdash; {photos.length} photos</span>
 				</li>
 				<li>
 					<Link href="/webring">WebRing</Link>

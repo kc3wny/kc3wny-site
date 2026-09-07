@@ -50,7 +50,7 @@ const nextConfig: NextConfig = {
 	// paired with our sharp dependency), not any hoisted top-level @img copy, which may
 	// belong to a different sharp version pulled in transitively (e.g. by Next itself).
 	outputFileTracingIncludes: {
-		"/api/content-image": [
+		"/api/content-image/[...path]": [
 			"./content/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-libvips-linux-x64/**/*",
