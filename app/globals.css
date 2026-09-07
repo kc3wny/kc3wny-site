@@ -1,137 +1,15 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+/* Minimal base reset. The visible site is styled entirely by app/retro.css,
+   scoped under .retro-desktop; this just normalizes the <body> underneath it. */
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  /* Paper/Document background - slightly off-white like aged technical paper */
-  --background: #f5f3ee;
-  --foreground: #1a1a1a;
-
-  /* Card surfaces */
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-
-  /* Primary - NASA orange accent */
-  --primary: #fe7f2d;
-  --primary-foreground: #ffffff;
-
-  /* Secondary - technical gray */
-  --secondary: #e8e6e1;
-  --secondary-foreground: #1a1a1a;
-
-  /* Muted - document gray */
-  --muted: #d4d2cd;
-  --muted-foreground: #5a5a5a;
-
-  /* Accent - same orange */
-  --accent: #fe7f2d;
-  --accent-foreground: #ffffff;
-
-  --destructive: #cc3300;
-  --destructive-foreground: #ffffff;
-
-  /* Borders - technical line weight */
-  --border: #1a1a1a;
-  --input: #1a1a1a;
-  --ring: #fe7f2d;
-
-  /* Charts */
-  --chart-1: #fe7f2d;
-  --chart-2: #1a1a1a;
-  --chart-3: #5a5a5a;
-  --chart-4: #d4d2cd;
-  --chart-5: #e8e6e1;
-
-  /* No rounded corners - technical manual style */
-  --radius: 0rem;
-
-  --sidebar: #f5f3ee;
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #fe7f2d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e8e6e1;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #1a1a1a;
-  --sidebar-ring: #fe7f2d;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
-@theme inline {
-  --font-sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  --font-serif: "EB Garamond", "Garamond", "Georgia", serif;
-  --font-mono: "Courier New", monospace;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Technical manual grid lines */
-.grid-paper {
-  background-image: linear-gradient(to right, #d4d2cd 1px, transparent 1px),
-    linear-gradient(to bottom, #d4d2cd 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-/* Document fold marks */
-.fold-marks::before,
-.fold-marks::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #d4d2cd;
-}
-
-.fold-marks::before {
-  top: 33.333%;
-}
-
-.fold-marks::after {
-  top: 66.666%;
+body {
+	margin: 0;
+	font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }

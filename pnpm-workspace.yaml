@@ -1,3 +1,24 @@
+nodeLinker: hoisted
+
+# Force patched versions of transitive deps pulled in by next. Both are
+# build-time only here (Next's own image optimizer is disabled, and postcss
+# only ever sees CSS from this repo), but pinning keeps `pnpm audit` clean
+# and closes them off if that ever changes.
+overrides:
+  postcss@<8.5.23: ">=8.5.23"
+  sharp@<0.35.0: ">=0.35.0"
+
 allowBuilds:
   sharp: true
   unrs-resolver: true
+
+supportedArchitectures:
+  os:
+    - current
+    - linux
+  cpu:
+    - current
+    - x64
+  libc:
+    - current
+    - glibc
