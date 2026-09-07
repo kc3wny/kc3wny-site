@@ -4,6 +4,8 @@
  * Run: node scripts/process-images.mjs
  *
  * This will:
+ * - Back-fill `capturedAt` in content/photography/*\/index.md from each
+ *   photo's EXIF date, before anything below strips it (see note there)
  * - Optimize images over 500KB (resize to max 2400px, compress to quality 85)
  * - Convert PNGs without transparency to JPEG
  * - Create backups of originals in content/.originals/ (local only, not on CI)
@@ -14,6 +16,8 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import sharp from "sharp";
+import matter from "gray-matter";
+import exifr from "exifr";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -197,8 +201,75 @@ async function processImage(fullPath, relativePath, size, cache) {
 	};
 }
 
+/**
+ * Back-fill `capturedAt` in each content/photography/<slug>/index.md from
+ * the sibling photo's EXIF date. Must run before the optimize pass below,
+ * which re-encodes large images without preserving EXIF (deliberately —
+ * that also strips GPS tags a photo might carry, which we don't want to
+ * publish). Once captured, the date lives in the markdown as plain text,
+ * so it survives future re-optimization and costs nothing to read at
+ * request time. Existing `capturedAt` values are never overwritten, so a
+ * hand-set date (EXIF missing or wrong) sticks.
+ */
+async function syncPhotographyCaptureDates() {
+	const photographyDir = path.join(contentDir, "photography");
+	if (!fs.existsSync(photographyDir)) return;
+
+	const entries = fs.readdirSync(photographyDir, { withFileTypes: true });
+	let filled = 0;
+
+	for (const entry of entries) {
+		if (!entry.isDirectory()) continue;
+		const dir = path.join(photographyDir, entry.name);
+		const indexPath = path.join(dir, "index.md");
+		if (!fs.existsSync(indexPath)) continue;
+
+		const parsed = matter(fs.readFileSync(indexPath, "utf8"));
+		if (parsed.data.capturedAt) continue;
+
+		const imageFile = fs
+			.readdirSync(dir)
+			.find((name) =>
+				IMAGE_EXTENSIONS.includes(path.extname(name).toLowerCase()),
+			);
+		if (!imageFile) continue;
+
+		const imagePath = path.join(dir, imageFile);
+		let capturedAt;
+		try {
+			const exif = await exifr.parse(imagePath, [
+				"DateTimeOriginal",
+				"CreateDate",
+			]);
+			const date = exif?.DateTimeOriginal ?? exif?.CreateDate;
+			if (date instanceof Date && !Number.isNaN(date.getTime())) {
+				capturedAt = date.toISOString();
+			}
+		} catch {
+			// No/unreadable EXIF — fall through to mtime below.
+		}
+		if (!capturedAt) {
+			capturedAt = fs.statSync(imagePath).mtime.toISOString();
+		}
+
+		const updated = matter.stringify(parsed.content, {
+			...parsed.data,
+			capturedAt,
+		});
+		fs.writeFileSync(indexPath, updated);
+		filled++;
+		console.log(`   📅 ${entry.name}: capturedAt = ${capturedAt}`);
+	}
+
+	if (filled > 0) {
+		console.log(`   Filled capturedAt for ${filled} photo(s)`);
+	}
+}
+
 async function main() {
 	console.log("🖼️  Processing content images...");
+	await syncPhotographyCaptureDates();
+
 	const images = findAllImages(contentDir);
 	const cache = loadCache();
 

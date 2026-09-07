@@ -12,6 +12,7 @@ type NavItem = { readonly label: string; readonly href: string };
 const NAV_ITEMS: readonly NavItem[] = [
 	{ label: "Home", href: "/" },
 	{ label: "Projects", href: "/projects" },
+	{ label: "Photography", href: "/photography" },
 	{ label: "Site Map", href: "/sitemap" },
 	{ label: "Contact", href: "/#contact" },
 	{ label: "Résumé (PDF)", href: "/MMatich_Resume.pdf" },
