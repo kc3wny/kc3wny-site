@@ -86,6 +86,28 @@ function extractFigureIds(
 	return ids;
 }
 
+/** Escapes a value being interpolated into a double-quoted HTML attribute. */
+function escapeAttr(value: string): string {
+	return value
+		.replaceAll("&", "&amp;")
+		.replaceAll('"', "&quot;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;");
+}
+
+/**
+ * Link targets are limited to schemes that can't execute — `javascript:` and
+ * `data:` URLs are dropped. DOMPurify would catch these downstream too; this
+ * keeps the generator from emitting them in the first place.
+ */
+function safeUrl(url: string): string | undefined {
+	const trimmed = url.trim();
+	if (/^(https?:|mailto:|tel:)/i.test(trimmed)) return trimmed;
+	// Relative paths and in-page anchors, but not protocol-relative "//host".
+	if (/^[#/](?!\/)/.test(trimmed)) return trimmed;
+	return undefined;
+}
+
 function parseInlineMarkdown(
 	text: string,
 	figureById: Map<string, ProjectFigure>,
@@ -95,9 +117,12 @@ function parseInlineMarkdown(
 	text = text.replaceAll(
 		/\[([^\]]+)\]\(([^)]+)\)/g,
 		(_match, linkText, url) => {
+			const href = safeUrl(url);
 			const placeholder = `§§§LINK${links.length}§§§`;
 			links.push(
-				`<a href="${url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`,
+				href
+					? `<a href="${escapeAttr(href)}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
+					: linkText,
 			);
 			return placeholder;
 		},
@@ -166,8 +191,9 @@ function parseMarkdownContent(
 			figureById,
 			photoNumberOf,
 		);
-		const alt = figure.caption.replace(/"/g, "&quot;");
-		return `<figure class="snap${wide ? " wide" : ""}" id="${id}"><a href="${figure.src}" target="_blank" rel="noopener noreferrer"><img src="${figure.src}" alt="${alt}" /></a><figcaption><b>Photo ${photoNumberOf(id)}.</b> ${caption}</figcaption></figure>`;
+		const alt = escapeAttr(figure.caption);
+		const src = escapeAttr(safeUrl(figure.src) ?? "");
+		return `<figure class="snap${wide ? " wide" : ""}" id="${escapeAttr(id)}"><a href="${src}" target="_blank" rel="noopener noreferrer"><img src="${src}" alt="${alt}" /></a><figcaption><b>Photo ${photoNumberOf(id)}.</b> ${caption}</figcaption></figure>`;
 	};
 	const renderEmbeds = (ids: string[]): string => {
 		const fresh = ids.filter((id) => !embeddedFigureIds.has(id));

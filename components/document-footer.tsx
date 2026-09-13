@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { buildInfo } from "@/lib/build-info";
-import { WEBRING_NEXT, WEBRING_PREV } from "@/lib/webring";
 import { WebringRandomLink } from "@/components/webring-random-link";
 
 type NavLink = { readonly href: string; readonly title: string };
@@ -60,22 +59,7 @@ export function DocumentFooter({
 					<div className="webring">
 						<b>« WebRing »</b>
 						<br />
-						<a
-							href={WEBRING_PREV.url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							[ &lt; Prev ]
-						</a>{" "}
-						&nbsp; <WebringRandomLink /> &nbsp;{" "}
-						<Link href="/webring">[ List ]</Link> &nbsp;{" "}
-						<a
-							href={WEBRING_NEXT.url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							[ Next &gt; ]
-						</a>
+						<WebringRandomLink /> &nbsp; <Link href="/webring">[ List ]</Link>
 					</div>
 				)}
 				<div className="badges">

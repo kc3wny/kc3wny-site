@@ -28,7 +28,84 @@ function getGitInfo() {
 	}
 }
 
+const isDev = process.env.NODE_ENV === "development";
+
+/**
+ * Content-Security-Policy.
+ *
+ * `script-src` has to allow 'unsafe-inline': every page here is prerendered
+ * as static HTML, and Next's hydration bootstrap is an inline <script>. A
+ * nonce would have to be minted per request, which means middleware and
+ * dynamic rendering on every page — trading the whole site's static delivery
+ * for a directive that guards an attack surface this site doesn't have (no
+ * user input is ever rendered; the only HTML built from content is markdown
+ * the repo owner writes, and that still goes through DOMPurify).
+ *
+ * `style-src` likewise needs it for React `style={{…}}` attributes and the
+ * critical CSS that `optimizeCss` inlines.
+ *
+ * Everything else is locked to same-origin, so an injected tag still can't
+ * pull code from, or exfiltrate to, another origin.
+ */
+const csp = [
+	"default-src 'self'",
+	// va.vercel-scripts.com only serves the debug build of the analytics
+	// scripts; in production they're proxied same-origin under /_vercel/.
+	`script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
+	"style-src 'self' 'unsafe-inline'",
+	"img-src 'self' data: blob:",
+	// Fonts are self-hosted by next/font at build time — no Google origins.
+	"font-src 'self'",
+	`connect-src 'self' https://vitals.vercel-insights.com${isDev ? " ws: wss:" : ""}`,
+	"object-src 'none'",
+	"base-uri 'self'",
+	"form-action 'self'",
+	"frame-ancestors 'none'",
+	"frame-src 'none'",
+	"manifest-src 'self'",
+	"worker-src 'self' blob:",
+	...(isDev ? [] : ["upgrade-insecure-requests"]),
+].join("; ");
+
+const securityHeaders = [
+	{ key: "Content-Security-Policy", value: csp },
+	// Belt-and-braces alongside frame-ancestors, for older browsers.
+	{ key: "X-Frame-Options", value: "DENY" },
+	{ key: "X-Content-Type-Options", value: "nosniff" },
+	{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+	{
+		key: "Permissions-Policy",
+		value:
+			"accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=(), xr-spatial-tracking=()",
+	},
+	{ key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+	{ key: "X-DNS-Prefetch-Control", value: "on" },
+	// Vercel sets HSTS on production domains already; stating it here keeps
+	// the guarantee if the site is ever served from anywhere else.
+	{
+		key: "Strict-Transport-Security",
+		value: "max-age=63072000; includeSubDomains; preload",
+	},
+];
+
 const nextConfig: NextConfig = {
+	async headers() {
+		return [
+			{
+				source: "/:path*",
+				headers: securityHeaders,
+			},
+			{
+				// Social platforms fetch the OG card server-side, but leaving it
+				// embeddable cross-origin keeps previews working everywhere.
+				source: "/api/og",
+				headers: [
+					{ key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
+				],
+			},
+		];
+	},
+
 	images: {
 		// Source images are already resized/compressed at build time (scripts/process-images.mjs)
 		// and served through /api/content-image, so Next's on-the-fly optimizer (and the
@@ -46,16 +123,25 @@ const nextConfig: NextConfig = {
 	// sharp's linux-x64/libvips native binaries are also forced in here: sharp loads them via
 	// a runtime-computed path that the tracer can't follow statically, so it silently drops
 	// them otherwise — even with serverExternalPackages set — causing ERR_DLOPEN_FAILED in
-	// production. This must point at sharp's own nested node_modules/@img copy (the version
-	// paired with our sharp dependency), not any hoisted top-level @img copy, which may
-	// belong to a different sharp version pulled in transitively (e.g. by Next itself).
+	// production.
+	//
+	// Both the hoisted and the nested @img locations are listed. The nested copy used to be
+	// the only correct one, because next pulled in a second, older sharp and the hoisted copy
+	// could have been that one instead. The pnpm-workspace.yaml override now pins a single
+	// sharp version tree-wide, so the hoisted copy is unambiguous — and pnpm hoists it there,
+	// leaving no nested copy at all. Keeping both entries means neither layout silently
+	// resolves to nothing if that changes again; a glob that matches nothing is a no-op.
 	outputFileTracingIncludes: {
 		"/api/content-image/[...path]": [
 			"./content/**/*",
+			"./node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-libvips-linux-x64/**/*",
 		],
 		"/api/og": [
+			"./node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-libvips-linux-x64/**/*",
 		],
@@ -67,7 +153,10 @@ const nextConfig: NextConfig = {
 	},
 
 	typescript: {
-		ignoreBuildErrors: true, // Added update
+		// Fail the build on type errors rather than shipping past them —
+		// `tsc --noEmit` is currently clean, so this costs nothing today and
+		// stops a silent regression from reaching production later.
+		ignoreBuildErrors: false,
 	},
 
 	async redirects() {
