@@ -18,11 +18,11 @@ skills:
   - category: "CAD"
     items: ["Siemens NX", "Fusion360", "SolidWorks", "KiCad"]
   - category: "Programming"
-    items: ["Simulink", "MatLab", "Python", "Git"]
+    items: ["Simulink", "MatLab", "Python", "Git", "Unix/Linux", "Embedded Linux"]
   - category: "Manufacturing"
     items: ["3D Printing (FDM/SLA)", "CNC Milling", "Fiber Laser Cutting", "Sheet Metal Fabrication", "Injection Molding"]
   - category: "Prototyping"
-    items: ["Motor Control", "Soldering (SMD/THT)", "Circuit Debugging", "Real-Time Microcontrollers", "Embedded systems (Arduino/RP2040)", "UART/i2c/SPI"]
+    items: ["Motor Control", "Soldering (SMD/THT)", "Oscilloscope/Logic Analyzer Circuit Debugging", "Real-Time Microcontrollers", "Embedded systems (Arduino/RP2040)", "UART/i2c/SPI"]
   - category: "Amateur Radio"
     items: ["Amateur Extra Class", "LoRa SatCom", "Mesh Networks"]
 
