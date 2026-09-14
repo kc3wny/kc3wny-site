@@ -16,7 +16,7 @@ biography:
 
 skills:
   - category: "CAD"
-    items: ["Siemens NX", "Fusion360", "SolidWorks", "KiCad"]
+    items: ["Siemens NX", "Fusion360", "SolidWorks", "KiCad", "4nec2 (Antenna Modeling)"]
   - category: "Programming"
     items: ["Simulink", "MatLab", "Python", "Git", "Unix/Linux", "Embedded Linux"]
   - category: "Manufacturing"
