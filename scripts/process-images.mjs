@@ -4,8 +4,9 @@
  * Run: node scripts/process-images.mjs
  *
  * This will:
- * - Back-fill `capturedAt` in content/photography/*\/index.md from each
- *   photo's EXIF date, before anything below strips it (see note there)
+ * - Back-fill `capturedAt` into each content/photography photo's sidecar
+ *   markdown from its EXIF date, before anything below strips it (see note
+ *   there), creating the sidecar if it's missing
  * - Optimize images over 500KB (resize to max 2400px, compress to quality 85)
  * - Convert PNGs without transparency to JPEG
  * - Create backups of originals in content/.originals/ (local only, not on CI)
@@ -202,14 +203,15 @@ async function processImage(fullPath, relativePath, size, cache) {
 }
 
 /**
- * Back-fill `capturedAt` in each content/photography/<slug>/index.md from
- * the sibling photo's EXIF date. Must run before the optimize pass below,
- * which re-encodes large images without preserving EXIF (deliberately —
- * that also strips GPS tags a photo might carry, which we don't want to
- * publish). Once captured, the date lives in the markdown as plain text,
- * so it survives future re-optimization and costs nothing to read at
- * request time. Existing `capturedAt` values are never overwritten, so a
- * hand-set date (EXIF missing or wrong) sticks.
+ * Back-fill `capturedAt` into each photo's sidecar markdown in
+ * content/photography/ (`sunset.jpg` → `sunset.md`), creating the sidecar if
+ * it doesn't exist yet. Must run before the optimize pass below, which
+ * re-encodes large images without preserving EXIF (deliberately — that also
+ * strips GPS tags a photo might carry, which we don't want to publish). Once
+ * captured, the date lives in the markdown as plain text, so it survives
+ * future re-optimization and costs nothing to read at request time. Existing
+ * `capturedAt` values are never overwritten, so a hand-set date (EXIF missing
+ * or wrong) sticks.
  */
 async function syncPhotographyCaptureDates() {
 	const photographyDir = path.join(contentDir, "photography");
@@ -219,22 +221,22 @@ async function syncPhotographyCaptureDates() {
 	let filled = 0;
 
 	for (const entry of entries) {
-		if (!entry.isDirectory()) continue;
-		const dir = path.join(photographyDir, entry.name);
-		const indexPath = path.join(dir, "index.md");
-		if (!fs.existsSync(indexPath)) continue;
+		if (!entry.isFile()) continue;
 
-		const parsed = matter(fs.readFileSync(indexPath, "utf8"));
+		const ext = path.extname(entry.name);
+		if (!IMAGE_EXTENSIONS.includes(ext.toLowerCase())) continue;
+
+		const imagePath = path.join(photographyDir, entry.name);
+		const sidecarPath = path.join(
+			photographyDir,
+			`${path.basename(entry.name, ext)}.md`,
+		);
+
+		const parsed = fs.existsSync(sidecarPath)
+			? matter(fs.readFileSync(sidecarPath, "utf8"))
+			: { data: {}, content: "" };
 		if (parsed.data.capturedAt) continue;
 
-		const imageFile = fs
-			.readdirSync(dir)
-			.find((name) =>
-				IMAGE_EXTENSIONS.includes(path.extname(name).toLowerCase()),
-			);
-		if (!imageFile) continue;
-
-		const imagePath = path.join(dir, imageFile);
 		let capturedAt;
 		try {
 			const exif = await exifr.parse(imagePath, [
@@ -256,9 +258,11 @@ async function syncPhotographyCaptureDates() {
 			...parsed.data,
 			capturedAt,
 		});
-		fs.writeFileSync(indexPath, updated);
+		fs.writeFileSync(sidecarPath, updated);
 		filled++;
-		console.log(`   📅 ${entry.name}: capturedAt = ${capturedAt}`);
+		console.log(
+			`   📅 ${path.basename(sidecarPath)}: capturedAt = ${capturedAt}`,
+		);
 	}
 
 	if (filled > 0) {

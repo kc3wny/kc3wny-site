@@ -3,12 +3,22 @@ import { DocumentWrapper } from "@/components/document-wrapper";
 import { DocumentFooter } from "@/components/document-footer";
 import { getAllPhotos } from "@/lib/photography";
 
+/**
+ * The lightbox caps its image at 900px wide (.lightbox-content) less padding,
+ * so a full-size 2400px source is ~2x more pixels than can ever be shown.
+ * 1600 still covers a 2x display and roughly halves the bytes.
+ */
+const LIGHTBOX_WIDTH = 1600;
+
+/** One row of .photo-grid at the 820px page width — see `priority` below. */
+const THUMBNAILS_ABOVE_THE_FOLD = 4;
+
 export const metadata = {
 	title: "photography@kc3wny.com",
-	description: "a chronological log of photos",
+	description: "a catalog of photos",
 	openGraph: {
 		title: "photography@kc3wny.com",
-		description: "a chronological log of photos",
+		description: "a catalog of photos",
 		type: "website",
 		url: "https://kc3wny.com/photography",
 		images: [
@@ -48,7 +58,7 @@ export default function PhotographyPage() {
 				Photography
 			</h1>
 			<p className="byline">
-				A chronological log of photos, newest first. {photos.length}{" "}
+				A catalog of photos, newest first. {photos.length}{" "}
 				{photos.length === 1 ? "photo" : "photos"}.
 			</p>
 
@@ -59,7 +69,7 @@ export default function PhotographyPage() {
 			) : (
 				<>
 					<div className="photo-grid">
-						{photos.map((photo) => (
+						{photos.map((photo, index) => (
 							<a
 								key={photo.slug}
 								href={`#${photo.slug}`}
@@ -71,14 +81,21 @@ export default function PhotographyPage() {
 								}
 							>
 								<Image
-									src={`${photo.src}?w=480`}
+									src={`${photo.src}&w=480`}
 									alt={photo.description || photo.location || "Photograph"}
 									width={480}
 									height={480}
+									// next/image lazy-loads by default, which is right for 50+
+									// thumbnails but hurts the one row that's above the fold —
+									// those are the LCP candidate, so load them up front.
+									priority={index < THUMBNAILS_ABOVE_THE_FOLD}
 								/>
 							</a>
 						))}
 					</div>
+
+					{/* Target for the close links below — see .lightbox-dismiss. */}
+					<div id="close-photo" className="lightbox-dismiss" />
 
 					{photos.map((photo) => {
 						const captured = new Date(photo.capturedAt);
@@ -86,7 +103,7 @@ export default function PhotographyPage() {
 							<div key={photo.slug} id={photo.slug} className="lightbox">
 								<figure className="lightbox-content">
 									<a
-										href="#photography"
+										href="#close-photo"
 										className="lightbox-close"
 										aria-label="Close"
 									>
@@ -94,8 +111,16 @@ export default function PhotographyPage() {
 									</a>
 									{/* biome-ignore lint/performance/noImgElement: dimensions vary per photo and this element is hidden until opened, so it can't affect layout or LCP */}
 									<img
-										src={photo.src}
+										src={`${photo.src}&w=${LIGHTBOX_WIDTH}`}
 										alt={photo.description || photo.location || "Photograph"}
+										// `display: none` does not stop an <img> from being
+										// fetched, so without this every full-size photo on the
+										// page downloads up front — ~19MB for a gallery this size,
+										// nearly all of it for lightboxes nobody opens. Lazy images
+										// inside a display:none subtree never intersect the
+										// viewport, so they wait until :target reveals them.
+										loading="lazy"
+										decoding="async"
 									/>
 									<figcaption>
 										<p>
