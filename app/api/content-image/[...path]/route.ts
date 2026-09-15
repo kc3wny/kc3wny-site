@@ -29,6 +29,71 @@ const ALLOWED_EXTENSIONS = new Set([
 ]);
 
 /**
+ * Encoded output, keyed by the *normalized* inputs (path + snapped width +
+ * the file's mtime/size), cached in-process.
+ *
+ * The CDN in front of this keys on the full URL, so `?w=480&anything=1`
+ * misses and re-invokes the route — and each miss is a full decode and
+ * re-encode of a multi-megapixel JPEG. Caching on the normalized key instead
+ * means those variants all collapse onto one piece of work: the URL can be
+ * varied without bound, the CPU cost can't. Including mtime and size in the
+ * key means a re-processed photo invalidates itself rather than going stale.
+ *
+ * Values are Promises, so concurrent requests for the same image await one
+ * encode instead of each starting their own — the burst case is exactly when
+ * duplicated work hurts most.
+ */
+const CACHE_MAX_BYTES = 48 * 1024 * 1024;
+
+interface CacheEntry {
+	promise: Promise<Buffer>;
+	/** 0 until the encode resolves; an in-flight entry costs no budget. */
+	bytes: number;
+}
+
+/** Insertion order is the LRU order — re-inserted on every hit. */
+const cache = new Map<string, CacheEntry>();
+let cacheBytes = 0;
+
+function cacheGet(key: string): CacheEntry | undefined {
+	const hit = cache.get(key);
+	if (hit) {
+		cache.delete(key);
+		cache.set(key, hit);
+	}
+	return hit;
+}
+
+/** Trim to budget, oldest first. `keep` is the entry just stored. */
+function evict(keep: string): void {
+	for (const [key, entry] of cache) {
+		if (cacheBytes <= CACHE_MAX_BYTES) return;
+		if (key === keep) continue;
+		cache.delete(key);
+		cacheBytes -= entry.bytes;
+	}
+}
+
+function cacheStore(key: string, promise: Promise<Buffer>): CacheEntry {
+	const entry: CacheEntry = { promise, bytes: 0 };
+	cache.set(key, entry);
+	promise.then(
+		(buffer) => {
+			// Evicted while in flight (or replaced): leave the budget alone.
+			if (cache.get(key) !== entry) return;
+			entry.bytes = buffer.length;
+			cacheBytes += buffer.length;
+			evict(key);
+		},
+		() => {
+			// Never cache a failure — the next request should retry.
+			if (cache.get(key) === entry) cache.delete(key);
+		},
+	);
+	return entry;
+}
+
+/**
  * True if the resolved file really sits inside content/. Comparing resolved
  * paths with a trailing separator matters: a plain `startsWith(CONTENT_ROOT)`
  * would also accept a sibling directory like `content-backup/`.
@@ -100,7 +165,13 @@ export async function GET(
 	}
 
 	try {
-		const fileBuffer = fs.readFileSync(fullPath);
+		// stat before read: it settles existence and gives the cache its
+		// invalidation key for the price of one syscall, so a cache hit never
+		// touches the file contents at all.
+		const stats = await fs.promises.stat(fullPath);
+		if (!stats.isFile()) {
+			return new NextResponse("Image not found", { status: 404 });
+		}
 		const baseName = path.basename(fullPath, ext);
 
 		// SVGs are served as-is (rasterizing them would defeat the point), and
@@ -108,7 +179,7 @@ export async function GET(
 		// author-written, but the sandbox + null CSP means even a malicious one
 		// that landed in content/ couldn't run script or phone home.
 		if (ext === ".svg") {
-			return new NextResponse(fileBuffer, {
+			return new NextResponse(await fs.promises.readFile(fullPath), {
 				headers: {
 					"Content-Type": "image/svg+xml",
 					"Cache-Control": "public, max-age=31536000, immutable",
@@ -120,21 +191,30 @@ export async function GET(
 			});
 		}
 
-		let pipeline = sharp(fileBuffer).rotate(); // auto-orient based on EXIF
-		if (targetWidth) {
-			pipeline = pipeline.resize(targetWidth, null, {
-				withoutEnlargement: true,
-				fit: "inside",
-			});
+		const cacheKey = `${fullPath}|${targetWidth ?? "full"}|${stats.mtimeMs}|${stats.size}`;
+		let entry = cacheGet(cacheKey);
+		if (!entry) {
+			const encode = (async () => {
+				let pipeline = sharp(await fs.promises.readFile(fullPath)).rotate(); // auto-orient based on EXIF
+				if (targetWidth) {
+					pipeline = pipeline.resize(targetWidth, null, {
+						withoutEnlargement: true,
+						fit: "inside",
+					});
+				}
+				return pipeline.jpeg({ quality: 85, progressive: true }).toBuffer();
+			})();
+			entry = cacheStore(cacheKey, encode);
 		}
-		const outputBuffer = await pipeline
-			.jpeg({ quality: 85, progressive: true })
-			.toBuffer();
+		const outputBuffer = await entry.promise;
 
 		return new NextResponse(new Uint8Array(outputBuffer), {
 			headers: {
 				"Content-Type": "image/jpeg",
 				"Cache-Control": "public, max-age=31536000, immutable",
+				// These are the site's own photographs; nothing here needs to be
+				// embeddable from another origin, and the gallery is same-origin.
+				"Cross-Origin-Resource-Policy": "same-origin",
 				// Output is always re-encoded to JPEG here, so use a .jpg name
 				// regardless of the source extension.
 				"Content-Disposition": contentDisposition(`${baseName}.jpg`),

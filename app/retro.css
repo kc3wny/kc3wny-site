@@ -555,6 +555,23 @@
 	align-items: center;
 	justify-content: center;
 }
+/*
+ * Where [ x Close ] sends you. Closing has to navigate somewhere -- that's
+ * what stops :target matching -- and any in-flow element would be scrolled
+ * into view, throwing the reader back to wherever it sits in the page. Fixed
+ * at the viewport's top edge, this one is already where a fragment jump would
+ * put it, so the browser scrolls by nothing and the grid stays put. Same
+ * reason opening a photo doesn't move the page: .lightbox is fixed at inset 0.
+ * Keep it pinned to top/left -- anchored anywhere else the browser would
+ * scroll the document trying to bring it to the top.
+ */
+.retro-desktop .lightbox-dismiss {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+}
 .retro-desktop .lightbox-content {
 	margin: 0;
 	max-width: 900px;
