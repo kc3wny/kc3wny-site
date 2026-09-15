@@ -129,8 +129,8 @@ importers:
         specifier: ^6.1.7
         version: 6.1.7(@types/react@19.2.17)(react@19.2.8)
       isomorphic-dompurify:
-        specifier: ^4.1.0
-        version: 4.1.0
+        specifier: ^4.2.0
+        version: 4.2.0
       next:
         specifier: 16.2.12
         version: 16.2.12(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -835,8 +835,8 @@ packages:
   is-potential-custom-element-name@1.0.1:
     resolution: {integrity: sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==}
 
-  isomorphic-dompurify@4.1.0:
-    resolution: {integrity: sha512-vjQwQSxyEkJHO6g+KIDlWj8swAzUB01pJu9GU9cLGHjE10d59GFzJkgtB2Lj5WTOoq9JeHlYjR/FFuqeopPO0Q==}
+  isomorphic-dompurify@4.2.0:
+    resolution: {integrity: sha512-0rp/dna3nh3lQNZrWRJTZzRS8rSYBFXq7zuDOMn0MiklhFyND8fQqQbAcVFv1MkRJ2xDhgR6G7E0bl1msYQKTQ==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
   js-yaml@3.15.2:
@@ -1473,7 +1473,7 @@ snapshots:
 
   is-potential-custom-element-name@1.0.1: {}
 
-  isomorphic-dompurify@4.1.0:
+  isomorphic-dompurify@4.2.0:
     dependencies:
       dompurify: 3.4.14
       jsdom: 30.0.1
