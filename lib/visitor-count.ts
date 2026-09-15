@@ -1,3 +1,4 @@
+import { inspect } from "node:util";
 import { headers } from "next/headers";
 import { createClient, type RedisClientType } from "redis";
 import { FALLBACK_COUNT } from "@/lib/visitor-count-constants";
@@ -19,6 +20,24 @@ import { FALLBACK_COUNT } from "@/lib/visitor-count-constants";
  */
 const RATE_LIMIT_SECONDS = 1;
 
+/**
+ * Scrub credentials out of anything headed for the logs.
+ *
+ * `console.error(err)` prints an Error's own enumerable properties, not just
+ * its stack — and a bad connection string produces a TypeError that carries
+ * the raw input it failed to parse. Logging that verbatim would copy the
+ * Redis password out of the env var and into the runtime logs, where it
+ * outlives the variable and is readable by anyone with log access. The
+ * connection string is the only secret this module handles, so redact the
+ * userinfo segment of any URL in the message and keep everything else.
+ */
+function redact(err: unknown): string {
+	return inspect(err, { depth: 2 }).replace(
+		/(rediss?:\/\/[^:@\s/]*:)[^@\s/]*@/gi,
+		"$1[redacted]@",
+	);
+}
+
 let client: RedisClientType | undefined;
 
 async function getClient(): Promise<RedisClientType | undefined> {
@@ -27,7 +46,9 @@ async function getClient(): Promise<RedisClientType | undefined> {
 
 	if (!client) {
 		client = createClient({ url });
-		client.on("error", (err) => console.error("Redis client error:", err));
+		client.on("error", (err) =>
+			console.error("Redis client error:", redact(err)),
+		);
 	}
 	if (!client.isOpen) {
 		await client.connect();
@@ -65,7 +86,7 @@ export async function getVisitorCount(): Promise<number> {
 		const current = await redis.get("visitor_count");
 		return current ? Number.parseInt(current, 10) : FALLBACK_COUNT;
 	} catch (err) {
-		console.error("Failed to read visitor count:", err);
+		console.error("Failed to read visitor count:", redact(err));
 		return FALLBACK_COUNT;
 	}
 }
@@ -90,7 +111,7 @@ export async function incrementVisitorCount(): Promise<number> {
 		const current = await redis.get("visitor_count");
 		return current ? Number.parseInt(current, 10) : FALLBACK_COUNT;
 	} catch (err) {
-		console.error("Failed to increment visitor count:", err);
+		console.error("Failed to increment visitor count:", redact(err));
 		return FALLBACK_COUNT;
 	}
 }
