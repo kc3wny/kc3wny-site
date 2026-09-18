@@ -829,29 +829,9 @@
     "size": 592061,
     "optimized": true
   },
-  "photography/vista.jpg": {
-    "hash": "fa8696d67f1f0fc7db4360d0592c99be",
-    "size": 301882,
-    "optimized": true
-  },
-  "photography/_DSC0023.jpg": {
-    "hash": "321737ad934fa02ede67fae099f002f7",
-    "size": 148953,
-    "optimized": true
-  },
-  "photography/_DSC0044.jpg": {
-    "hash": "a934d819a5e3c5ac4f87b9f5125ea71f",
-    "size": 149255,
-    "optimized": true
-  },
   "photography/_DSC0097.jpg": {
     "hash": "36ac3c86caa7806e2a9ffb3c6298f2f9",
     "size": 164345,
-    "optimized": true
-  },
-  "photography/_DSC0134.jpg": {
-    "hash": "531f5c82851a5c40981ccb9f04a0e2e1",
-    "size": 141892,
     "optimized": true
   },
   "photography/_DSC0158.jpg": {
@@ -869,11 +849,6 @@
     "size": 169164,
     "optimized": true
   },
-  "photography/_DSC0453.jpg": {
-    "hash": "1f1548fec11443b9ba80b4538bbdd457",
-    "size": 81579,
-    "optimized": true
-  },
   "photography/_DSC0445.jpg": {
     "hash": "ae467acd6e63bc7b560408cc9069e8b7",
     "size": 144829,
@@ -882,11 +857,6 @@
   "photography/_DSC0262.jpg": {
     "hash": "68ccc062bc9ef5ef9fa8884b2fa309a3",
     "size": 232877,
-    "optimized": true
-  },
-  "photography/_DSC0453_01.jpg": {
-    "hash": "32ec64d1be0109c327eb1ce5002dba9b",
-    "size": 93707,
     "optimized": true
   },
   "photography/_DSC0574.jpg": {
@@ -899,39 +869,9 @@
     "size": 310084,
     "optimized": true
   },
-  "photography/_DSC0707.jpg": {
-    "hash": "d3ec9247df04d54abcbc3ee6eaac2e32",
-    "size": 108648,
-    "optimized": true
-  },
-  "photography/_DSC0454.jpg": {
-    "hash": "abdb2bc933f40b032234862a4fb420d8",
-    "size": 147421,
-    "optimized": true
-  },
-  "photography/_DSC0732.jpg": {
-    "hash": "53a9fdf120fbfeb8b422d78a39f1dafe",
-    "size": 271094,
-    "optimized": true
-  },
   "photography/_DSC0780.jpg": {
     "hash": "c8b16d926c6080a632136072a935c799",
     "size": 501202,
-    "optimized": true
-  },
-  "photography/_DSC0739.jpg": {
-    "hash": "08f92c8c5a85bf28630ed35ddbf52ded",
-    "size": 151583,
-    "optimized": true
-  },
-  "photography/_DSC0740.jpg": {
-    "hash": "8302d8eeea94d703a85837c3b34a95e7",
-    "size": 150113,
-    "optimized": true
-  },
-  "photography/_DSC0751.jpg": {
-    "hash": "4ae53c6e6e25abeb56b13a4b0b89e0b1",
-    "size": 407820,
     "optimized": true
   },
   "photography/_DSC0789.jpg": {
@@ -939,44 +879,14 @@
     "size": 167490,
     "optimized": true
   },
-  "photography/_DSC0801.jpg": {
-    "hash": "a843553df83b9446921ec44f10311f94",
-    "size": 252523,
-    "optimized": true
-  },
   "photography/_DSC0794.jpg": {
     "hash": "543b239a98c97eaed76cc3db7727667c",
     "size": 310009,
     "optimized": true
   },
-  "photography/_DSC0793.jpg": {
-    "hash": "5999a70400bee8f1f4a68d2e077b00d7",
-    "size": 141430,
-    "optimized": true
-  },
-  "photography/_DSC0807.jpg": {
-    "hash": "f4b8b2fbc06501698a78c3c16f193205",
-    "size": 129146,
-    "optimized": true
-  },
-  "photography/_DSC0824.jpg": {
-    "hash": "dab791a2e9ae3d82cb22de10d3460555",
-    "size": 123665,
-    "optimized": true
-  },
-  "photography/_DSC0845.jpg": {
-    "hash": "c261d892d5aac3cfd9b8ecd9cf93b04f",
-    "size": 132194,
-    "optimized": true
-  },
   "photography/_DSC0851.jpg": {
     "hash": "403942b800768c3889d15bff673904bd",
     "size": 184017,
-    "optimized": true
-  },
-  "photography/_DSC0878.jpg": {
-    "hash": "eda7da38f18e86fcecc771a120070492",
-    "size": 129406,
     "optimized": true
   },
   "photography/_DSC0903.jpg": {
@@ -989,24 +899,39 @@
     "size": 466388,
     "optimized": true
   },
-  "photography/_DSC0984.jpg": {
-    "hash": "6d0590c1487ed85ec1bc2255f17571e2",
-    "size": 235728,
-    "optimized": true
-  },
-  "photography/_DSC0999.jpg": {
-    "hash": "2339ad074e5f82ab7972d952f2d44dda",
-    "size": 209030,
-    "optimized": true
-  },
   "photography/_DSC0929.jpg": {
     "hash": "fb2c33e30802366c5134a13d89b41047",
     "size": 141212,
     "optimized": true
   },
-  "photography/_DSC0974.jpg": {
-    "hash": "a2d410df4388b7bff1b45a1b9dcfb07e",
-    "size": 190632,
-    "optimized": true
+  "photography/IMAGE01.jpg": {
+    "hash": "0ab387d83a2299182a77a72ebbd12595",
+    "size": 51340,
+    "optimized": false
+  },
+  "photography/IMAGE02.jpg": {
+    "hash": "4e3ff1ac074e348d6845fdc3ba0750c3",
+    "size": 60729,
+    "optimized": false
+  },
+  "photography/IMAGE03.jpg": {
+    "hash": "132bcfa20bf71b1f1276d232fc4da165",
+    "size": 59586,
+    "optimized": false
+  },
+  "photography/IMAGE05.jpg": {
+    "hash": "bebe0c4aad75f8676d71f7c8f4772590",
+    "size": 52315,
+    "optimized": false
+  },
+  "photography/IMAGE09.jpg": {
+    "hash": "96363f013c9d297be7f5172c0bb8b496",
+    "size": 61674,
+    "optimized": false
+  },
+  "photography/joby.jpg": {
+    "hash": "8ca46d6e98b0cd0e5e61d6d4d3961811",
+    "size": 536045,
+    "optimized": false
   }
 }

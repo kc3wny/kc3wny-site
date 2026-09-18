@@ -1,4 +1,6 @@
 ---
 capturedAt: '2026-03-07T22:37:04.000Z'
+location: 'Christmas Tree Point, San Francisco, CA'
+description: 'Christmas Tree Point Tower 1. Shot on Nikon D700'
 ---
 
