@@ -90,6 +90,10 @@
 	font-weight: 700;
 	line-height: 1.05;
 }
+.retro-desktop .page-title {
+	font-size: 34px;
+	margin: 6px 0 2px;
+}
 .retro-desktop .mh-info {
 	text-align: right;
 }
@@ -768,5 +772,188 @@
 	}
 	.retro-desktop .lightbox-content {
 		padding: 8px;
+	}
+}
+
+/* ---- print / save as PDF ----
+   A dense, paper-style layout: the grey desktop, panel, nav and badge
+   chrome are dropped, type and spacing are tightened, and single figures
+   float beside the text instead of taking a full-width row each. */
+@media print {
+	@page {
+		size: letter;
+		margin: 12mm 13mm 14mm;
+		@bottom-left {
+			content: "kc3wny.com";
+			font-family: "EB Garamond", Georgia, serif;
+			font-size: 8pt;
+			color: #77746a;
+		}
+		@bottom-right {
+			content: counter(page) " / " counter(pages);
+			font-family: "EB Garamond", Georgia, serif;
+			font-size: 8pt;
+			color: #77746a;
+		}
+	}
+	.retro-desktop {
+		background: #fff;
+		min-height: 0;
+		padding: 0;
+		font-size: 10pt;
+		line-height: 1.32;
+	}
+	.retro-desktop .page {
+		max-width: none;
+		border: 0;
+		box-shadow: none;
+	}
+	.retro-desktop .page-inner {
+		padding: 0;
+	}
+	.retro-desktop .navbar,
+	.retro-desktop .no-print,
+	.retro-desktop .foot .badges,
+	.retro-desktop .foot .webring {
+		display: none;
+	}
+	.retro-desktop a,
+	.retro-desktop a:visited,
+	.retro-desktop .foot .legal a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* masthead + title block */
+	.retro-desktop .masthead {
+		margin-bottom: 0;
+	}
+	.retro-desktop .masthead td {
+		padding: 0 0 2px;
+	}
+	.retro-desktop .mh-logo img {
+		height: 30px;
+	}
+	.retro-desktop .mh-tag,
+	.retro-desktop .mh-loc {
+		font-size: 7.5pt;
+		margin-top: 1px;
+	}
+	.retro-desktop hr {
+		margin: 5px 0;
+		border-top-width: 1.5px;
+	}
+	.retro-desktop .page-title {
+		font-size: 20pt;
+		margin: 2px 0 0;
+	}
+	.retro-desktop .byline {
+		margin: 1px 0;
+		font-size: 10.5pt;
+	}
+	.retro-desktop .small {
+		margin: 0;
+		font-size: 8pt;
+	}
+
+	/* body text */
+	.retro-desktop p {
+		margin: 0 0 5px;
+		text-align: justify;
+		hyphens: auto;
+		orphans: 3;
+		widows: 3;
+	}
+	.retro-desktop ul.disc {
+		margin: 3px 0 6px;
+		padding-left: 16px;
+	}
+	.retro-desktop ul.disc li {
+		margin: 1px 0;
+	}
+	.retro-desktop h2.sec {
+		/* A block formatting context so the heading and its rule sit beside a
+		   floated figure rather than running underneath it. */
+		display: flow-root;
+		font-size: 12.5pt;
+		margin: 9px 0 4px;
+		padding-bottom: 1px;
+		border-bottom-width: 1px;
+		break-after: avoid;
+	}
+	.retro-desktop h2.sec .anchor {
+		margin-right: 5px;
+	}
+
+	/* specifications table */
+	.retro-desktop table.grid {
+		margin: 4px 0 8px;
+		font-size: 8.5pt;
+		line-height: 1.25;
+		border-width: 1px;
+		break-inside: avoid;
+	}
+	.retro-desktop table.grid caption {
+		font-size: 7pt;
+		padding-bottom: 2px;
+	}
+	.retro-desktop table.grid td {
+		padding: 1.5px 6px;
+	}
+	.retro-desktop table.grid td.k {
+		font-size: 8pt;
+		width: 1%;
+	}
+
+	/* figures: singles float right, groups become a compact row */
+	.retro-desktop figure.snap {
+		padding: 3px;
+		border-width: 1px;
+		break-inside: avoid;
+	}
+	.retro-desktop figure.snap.wide {
+		float: right;
+		clear: right;
+		width: 40%;
+		margin: 2px 0 6px 12px;
+	}
+	.retro-desktop figure.snap.wide img {
+		max-height: 6.5cm;
+		object-fit: contain;
+	}
+	.retro-desktop .gallery {
+		display: grid;
+		/* ~4 across at full width, fewer (but not tiny) beside a floated figure */
+		grid-template-columns: repeat(auto-fill, minmax(4.2cm, 1fr));
+		gap: 5px;
+		margin: 4px 0 7px;
+	}
+	.retro-desktop .gallery figure.snap {
+		width: auto;
+	}
+	.retro-desktop .gallery figure.snap img {
+		height: 3.1cm;
+	}
+	.retro-desktop figure.snap figcaption {
+		font-size: 7pt;
+		line-height: 1.25;
+		padding-top: 2px;
+	}
+
+	/* footer: just the copyright line */
+	.retro-desktop .foot {
+		clear: both;
+		margin-top: 10px;
+		padding-top: 4px;
+		border-top-width: 1px;
+		font-size: 7.5pt;
+	}
+
+	.retro-desktop figure.snap,
+	.retro-desktop table.grid caption,
+	.retro-desktop table.grid td.k,
+	.retro-desktop .tag {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
 	}
 }
