@@ -36,7 +36,7 @@ export function DocumentFooter({
 	return (
 		<>
 			{(prev || next) && (
-				<p className="center tt">
+				<p className="center tt no-print">
 					{prev && <Link href={prev.href}>[ « {prev.title} ]</Link>}
 					{prev && next && <>&nbsp;&nbsp;</>}
 					{next && <Link href={next.href}>[ {next.title} » ]</Link>}
@@ -44,7 +44,7 @@ export function DocumentFooter({
 			)}
 
 			{backLinks && backLinks.length > 0 && (
-				<p className="center tt">
+				<p className="center tt no-print">
 					{backLinks.map((l, i) => (
 						<span key={l.href}>
 							{i > 0 && <>&nbsp;&nbsp;</>}

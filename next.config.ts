@@ -117,7 +117,9 @@ const nextConfig: NextConfig = {
 	// can't statically trace — keeping it external ensures Vercel's output file tracer
 	// copies the whole package (including the linux-x64 libvips binary) instead of
 	// missing it, which otherwise throws ERR_DLOPEN_FAILED in production.
-	serverExternalPackages: ["sharp"],
+	// react-pdf ships its own React reconciler and font engine; bundling it
+	// into the route breaks its internals, so it's loaded from node_modules.
+	serverExternalPackages: ["sharp", "@react-pdf/renderer"],
 
 	// Tell Vercel's output file tracer to include content/ images with the API route bundle.
 	// sharp's linux-x64/libvips native binaries are also forced in here: sharp loads them via
@@ -134,6 +136,16 @@ const nextConfig: NextConfig = {
 	outputFileTracingIncludes: {
 		"/api/content-image/[...path]": [
 			"./content/**/*",
+			"./node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
+			"./node_modules/sharp/node_modules/@img/sharp-linux-x64/**/*",
+			"./node_modules/sharp/node_modules/@img/sharp-libvips-linux-x64/**/*",
+		],
+		// Prerendered at build, but traced anyway in case it's ever rendered on demand.
+		"/projects/[slug]/pdf": [
+			"./content/**/*",
+			"./assets/fonts/**/*",
+			"./public/logo/v4_wide_text.svg",
 			"./node_modules/@img/sharp-linux-x64/**/*",
 			"./node_modules/@img/sharp-libvips-linux-x64/**/*",
 			"./node_modules/sharp/node_modules/@img/sharp-linux-x64/**/*",

@@ -3,11 +3,13 @@ import Image from "next/image";
 import DOMPurify from "isomorphic-dompurify";
 import parse from "html-react-parser";
 import { DocumentWrapper } from "@/components/document-wrapper";
+import { getAllProjects, getProjectBySlug } from "@/lib/projects";
 import {
-	getAllProjects,
-	getProjectBySlug,
-	type ProjectFigure,
-} from "@/lib/projects";
+	type ContentBlock,
+	type EmbeddedFigure,
+	escapeAttr,
+	parseProjectContent,
+} from "@/lib/project-content";
 import { DocumentFooter } from "@/components/document-footer";
 import { parseLocalDate } from "@/lib/utils";
 
@@ -65,204 +67,33 @@ export async function generateMetadata({
 	};
 }
 
-type ParsedContent = { html: string; embeddedFigureIds: Set<string> };
-
-const parseCache = new Map<string, ParsedContent>();
-
-/** Figure ids referenced by a line, in order, deduped, restricted to known figures. */
-function extractFigureIds(
-	line: string,
-	figureById: Map<string, ProjectFigure>,
-): string[] {
-	const seen = new Set<string>();
-	const ids: string[] = [];
-	for (const match of line.matchAll(/\bFIG-\d{3}\b/g)) {
-		const id = match[0];
-		if (figureById.has(id) && !seen.has(id)) {
-			seen.add(id);
-			ids.push(id);
-		}
-	}
-	return ids;
+function figureHtml(figure: EmbeddedFigure, wide: boolean): string {
+	const src = escapeAttr(figure.src);
+	return `<figure class="snap${wide ? " wide" : ""}" id="${escapeAttr(figure.id)}"><a href="${src}" target="_blank" rel="noopener noreferrer"><img src="${src}" alt="${escapeAttr(figure.alt)}" /></a><figcaption><b>Photo ${figure.photoNumber}.</b> ${figure.captionHtml}</figcaption></figure>`;
 }
 
-/** Escapes a value being interpolated into a double-quoted HTML attribute. */
-function escapeAttr(value: string): string {
-	return value
-		.replaceAll("&", "&amp;")
-		.replaceAll('"', "&quot;")
-		.replaceAll("<", "&lt;")
-		.replaceAll(">", "&gt;");
-}
-
-/**
- * Link targets are limited to schemes that can't execute — `javascript:` and
- * `data:` URLs are dropped. DOMPurify would catch these downstream too; this
- * keeps the generator from emitting them in the first place.
- */
-function safeUrl(url: string): string | undefined {
-	const trimmed = url.trim();
-	if (/^(https?:|mailto:|tel:)/i.test(trimmed)) return trimmed;
-	// Relative paths and in-page anchors, but not protocol-relative "//host".
-	if (/^[#/](?!\/)/.test(trimmed)) return trimmed;
-	return undefined;
-}
-
-function parseInlineMarkdown(
-	text: string,
-	figureById: Map<string, ProjectFigure>,
-	photoNumberOf: (id: string) => number,
-): string {
-	const links: string[] = [];
-	text = text.replaceAll(
-		/\[([^\]]+)\]\(([^)]+)\)/g,
-		(_match, linkText, url) => {
-			const href = safeUrl(url);
-			const placeholder = `§§§LINK${links.length}§§§`;
-			links.push(
-				href
-					? `<a href="${escapeAttr(href)}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
-					: linkText,
-			);
-			return placeholder;
-		},
-	);
-
-	text = text.replaceAll(/\b(FIG-\d{3})\b/g, (_match, figId) => {
-		if (figureById.has(figId)) {
-			const placeholder = `§§§LINK${links.length}§§§`;
-			links.push(
-				`<a href="#${figId}" class="tt">Photo ${photoNumberOf(figId)}</a>`,
-			);
-			return placeholder;
-		}
-		return figId;
-	});
-
-	text = text.replaceAll(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
-	text = text.replaceAll(/\*([^*]+)\*/g, "<i>$1</i>");
-	text = text.replaceAll(/_([^_]+)_/g, "<i>$1</i>");
-	text = text.replaceAll(/`([^`]+)`/g, '<span class="tt">$1</span>');
-
-	links.forEach((link, index) => {
-		text = text.replace(`§§§LINK${index}§§§`, link);
-	});
-
-	return text;
-}
-
-/**
- * Markdown → retro HTML. `## ` headings become §-numbered, citable sections.
- *
- * Figures cited inline (`(FIG-004)`, `[FIG-005, FIG-006]`, bare `FIG-010`, …)
- * are embedded as actual images immediately after the paragraph that cites
- * them — grouped into a two-up `.gallery` when a paragraph cites more than
- * one — instead of only linking down to a gallery at the bottom of the page.
- * Each figure is embedded once, at its first citation. Any figures never
- * cited in the body are left for the caller to render in a trailing gallery.
- */
-function parseMarkdownContent(
-	content: string,
-	figures?: ProjectFigure[],
-): ParsedContent {
-	const cacheKey = `${content}_${figures?.map((f) => `${f.id}:${f.src}:${f.caption}`).join(",") || ""}`;
-	const cached = parseCache.get(cacheKey);
-	if (cached) return cached;
-
-	const figureById = new Map((figures ?? []).map((f) => [f.id, f]));
-	const photoNumberById = new Map<string, number>();
-	let nextPhotoNumber = 1;
-	const photoNumberOf = (id: string): number => {
-		let n = photoNumberById.get(id);
-		if (n === undefined) {
-			n = nextPhotoNumber++;
-			photoNumberById.set(id, n);
-		}
-		return n;
-	};
-
-	const embeddedFigureIds = new Set<string>();
-	const renderFigure = (id: string, wide: boolean): string => {
-		const figure = figureById.get(id);
-		if (!figure) return "";
-		embeddedFigureIds.add(id);
-		const caption = parseInlineMarkdown(
-			figure.caption,
-			figureById,
-			photoNumberOf,
-		);
-		const alt = escapeAttr(figure.caption);
-		const src = escapeAttr(safeUrl(figure.src) ?? "");
-		return `<figure class="snap${wide ? " wide" : ""}" id="${escapeAttr(id)}"><a href="${src}" target="_blank" rel="noopener noreferrer"><img src="${src}" alt="${alt}" /></a><figcaption><b>Photo ${photoNumberOf(id)}.</b> ${caption}</figcaption></figure>`;
-	};
-	const renderEmbeds = (ids: string[]): string => {
-		const fresh = ids.filter((id) => !embeddedFigureIds.has(id));
-		if (fresh.length === 0) return "";
-		if (fresh.length === 1) return renderFigure(fresh[0], true);
-		return `<div class="gallery">${fresh.map((id) => renderFigure(id, false)).join("")}</div>`;
-	};
-
-	let sectionNo = 0;
-	const bullets: string[] = [];
-	const paragraphLines: string[] = [];
-
-	const flushBullets = (): string => {
-		if (bullets.length === 0) return "";
-		const list = `<ul class="disc">${bullets.join("")}</ul>`;
-		bullets.length = 0;
-		return list;
-	};
-
-	// A blank line ends a paragraph; consecutive non-blank lines in between are
-	// soft-wrapped and joined into one, so authors can wrap prose naturally in
-	// their editor instead of writing each paragraph as a single long line.
-	const flushParagraph = (): string => {
-		if (paragraphLines.length === 0) return "";
-		const joined = paragraphLines.join(" ");
-		paragraphLines.length = 0;
-		const isBold = joined.startsWith("**") && joined.endsWith("**");
-		const text = isBold ? joined.slice(2, -2) : joined;
-		const inner = parseInlineMarkdown(text, figureById, photoNumberOf);
-		const p = isBold ? `<p><b>${inner}</b></p>` : `<p>${inner}</p>`;
-		return p + renderEmbeds(extractFigureIds(joined, figureById));
-	};
-
-	const out: string[] = [];
-	for (const line of content.split("\n")) {
-		const bulletMatch = /^- (.*)/.exec(line);
-		if (bulletMatch) {
-			out.push(flushParagraph());
-			bullets.push(
-				`<li>${parseInlineMarkdown(bulletMatch[1], figureById, photoNumberOf)}</li>`,
-			);
-			continue;
-		}
-		out.push(flushBullets());
-
-		if (line.startsWith("## ")) {
-			out.push(flushParagraph());
-			sectionNo += 1;
-			const id = `s${sectionNo}`;
-			const headerText = parseInlineMarkdown(
-				line.slice(3),
-				figureById,
-				photoNumberOf,
-			);
-			out.push(
-				`<h2 class="sec" id="${id}"><a class="anchor" href="#${id}">§${sectionNo}</a>${headerText}</h2>`,
-			);
-		} else if (line.trim() === "") {
-			out.push(flushParagraph());
-		} else {
-			paragraphLines.push(line);
-		}
-	}
-	out.push(flushBullets());
-	out.push(flushParagraph());
-
-	const result: ParsedContent = { html: out.join(""), embeddedFigureIds };
-	parseCache.set(cacheKey, result);
-	return result;
+/** Content blocks → retro HTML: §-numbered, citable sections and inline figures. */
+function blocksToHtml(blocks: ContentBlock[]): string {
+	return blocks
+		.map((block) => {
+			switch (block.type) {
+				case "heading": {
+					const id = `s${block.sectionNo}`;
+					return `<h2 class="sec" id="${id}"><a class="anchor" href="#${id}">§${block.sectionNo}</a>${block.html}</h2>`;
+				}
+				case "paragraph":
+					return block.bold
+						? `<p><b>${block.html}</b></p>`
+						: `<p>${block.html}</p>`;
+				case "list":
+					return `<ul class="disc">${block.items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+				case "figure":
+					return figureHtml(block.figure, true);
+				default: // "gallery"
+					return `<div class="gallery">${block.figures.map((f) => figureHtml(f, false)).join("")}</div>`;
+			}
+		})
+		.join("");
 }
 
 export default async function ProjectPage({
@@ -272,7 +103,7 @@ export default async function ProjectPage({
 	const project = getProjectBySlug(slug);
 	if (!project) notFound();
 
-	const { html: contentHtml, embeddedFigureIds } = parseMarkdownContent(
+	const { blocks, embeddedFigureIds } = parseProjectContent(
 		project.content,
 		project.images?.figures,
 	);
@@ -287,9 +118,7 @@ export default async function ProjectPage({
 		<DocumentWrapper>
 			<hr />
 
-			<h1 className="mh-call" style={{ fontSize: "34px", margin: "6px 0 2px" }}>
-				{project.title}
-			</h1>
+			<h1 className="mh-call page-title">{project.title}</h1>
 			<p className="byline">{project.description}</p>
 			<p className="small">
 				Published{" "}
@@ -305,6 +134,12 @@ export default async function ProjectPage({
 					month: "short",
 					day: "numeric",
 				})}
+				<span className="no-print">
+					{" · "}
+					<a href={`/projects/${project.slug}/pdf`} download>
+						[ Download PDF ]
+					</a>
+				</span>
 			</p>
 
 			<hr />
@@ -349,7 +184,7 @@ export default async function ProjectPage({
 			)}
 
 			{/* Markdown body */}
-			<SanitizedHtmlContent html={contentHtml} />
+			<SanitizedHtmlContent html={blocksToHtml(blocks)} />
 
 			{/* Figure gallery */}
 			{figures.length > 0 && (
